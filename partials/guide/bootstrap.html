@@ -1,0 +1,83 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2>概要</h2>
+
+<p>このページでは、Angularの初期化の手順と、手動で初期化する必要があればどのようにそれが行えるかを説明していきます。</p>
+
+<h2>Angular <code>&lt;script&gt;</code> タグ</h2>
+
+<p>以下の例では、いわゆる自動初期化におけるAngularの推奨された使い方を示します。</p>
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html xmlns:ng="http://angularjs.org" ng-app&gt;
+  &lt;body&gt;
+    ...
+    &lt;script src="angular.js"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<ul>
+<li><code>script</code>タグはページの最下部に配置します。scriptタグをページの最下部に配置することで、<code>angular.js</code>の読み込みによるHTMLの読み込みブロックが発生しないので、アプリケーションの読み込み時間を改善できます。最新のファイルは<a href="http://code.angularjs.org/">http://code.angularjs.org/</a>から取得できます。セキュリティホールをさらすことになるので、プロダクションコードにこのURLのリンクを用いてはいけません。開発段階のコードに用いることは問題ありません。
+<ul><li>選択肢：<code>angular-[version].js</code>は、人が読める、開発とデバッグに適切なファイルです。</li>
+<li>選択肢：<code>angular-[version].min.js</code>は、プロダクションレベルで使うのに適切な、圧縮され難読化されたファイルです。</li></ul></li>
+<li><p>自動的にangularを起動したければ、アプリケーションのルートに、一般的には、<code>&lt;html&gt;</code>タグに<code>ng-app</code>を配置します。</p>
+
+<pre><code>&lt;html ng-app&gt;
+</code></pre></li>
+<li><p>古いスタイルの構文<code>ng:</code>を使用する場合、IEを幸せにするため、<code>html</code>にxml-namespaceが含まれます。(これは歴史的な理由によるもので、<code>ng:</code>を使用することは現在推奨されていません。)</p>
+
+<pre><code>&lt;html xmlns:ng="http://angularjs.org"&gt;
+</code></pre></li>
+</ul>
+
+<h2>自動初期化</h2>
+
+<p><code>DOMContentLoaded</code>のタイミングでAngularは自動的に初期化します。この時、Angularはアプリケーションのルートに指定されている<a href="api/ng.directive:ngApp"><code><code>ng-app</code></code></a>の命令を探します。
+<a href="api/ng.directive:ngApp"><code><code>ng-app</code></code></a>の命令が見つかれば、Angularは以下のことを行います。:</p>
+
+<ul>
+<li>命令に関連づけられた<a href="guide/module">モジュール</a>の読み込み。</li>
+<li>アプリケーションの<a href="api/AUTO.$injector"><code>インジェクター</code></a>を生成。</li>
+<li>Angularにコンパイルされるルートとして、<a href="api/ng.directive:ngApp"><code><code>ng-app</code></code></a>の命令を処理するDOMをコンパイルします。このDOMの部分のみをAngularのアプリケーションとして取り扱うことができます。</li>
+</ul>
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html ng-app="optionalModuleName"&gt;
+  &lt;body&gt;
+    足し算ができます: {{ 1+2 }}。
+    &lt;script src="angular.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>手動初期化</h2>
+
+<p>初期化の過程でより多くのことをする必要がある場合は、手動で初期化することができます。 そうしなければならないケースでは、スクリプトローダーを用いるかAngularがページをコンパイルする前に処理を行う必要があります。</p>
+
+<p>以下はAngularの手動初期化の例です。この例は<a href="api/ng.directive:ngApp"><code>ng-app</code></a>の命令を用いることと同じ意味を持ちます。</p>
+
+<pre class="prettyprint linenums">
+&lt;!doctype html&gt;
+&lt;html xmlns:ng="http://angularjs.org"&gt;
+  &lt;body&gt;
+    こんにちわ {{'世界'}}!
+    &lt;script src="http://code.angularjs.org/angular.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+       angular.element(document).ready(function() {
+         angular.bootstrap(document);
+       });
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>コードは以下の手順に従います。:</p>
+
+<ol>
+<li>ページと全てのコードが読み込まれたら、HTMLテンプレートのルート、一般的にはドキュメントルートを探します。</li>
+<li>実行可能で双方向にバインドされたアプリケーションにテンプレートを<a href="guide/compiler">コンパイル</a>するために<a href="api/angular.bootstrap"><code>api/angular.bootstrap</code></a>を呼び出します。</li>
+</ol></div>
