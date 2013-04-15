@@ -1,0 +1,159 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><ul doc-tutorial-nav="3"></ul>
+
+<p>前のステップではアプリの基礎部分を作る過程でたくさんのことをしました。なので今度は簡単なことをやりましょう。全文検索を追加します（そう、簡単なはずです！）。それからエンドツーエンドのテストも書きます。優れたエンドツーエンドテストは素敵なお友達だからです。それはあなたのアプリと共にあり、片時も目を離さず、素早くリグレッションに気づいてくれます。</p>
+
+<div doc-tutorial-reset="3">
+</div>
+
+<p>今度はアプリに検索ボックスがつきました。ページ上のスマートフォンのリストはユーザーが検索ボックスにタイプしたものによって変化します。</p>
+
+<p>ステップ２と３の主な変更点は以下に挙げます。完全な差分は<a href="https://github.com/angular/angular-phonecat/compare/step-2...step-3">GitHub</a>で見ることができます：</p>
+
+<h3>コントローラー</h3>
+
+<p>コントローラーには何も変更を加えていません。</p>
+
+<h3>テンプレート</h3>
+
+<p><strong><code>app/index.html</code>:</strong>
+<pre class="prettyprint linenums">
+  &lt;div class="container-fluid"&gt;
+    &lt;div class="row-fluid"&gt;
+      &lt;div class="span2"&gt;
+        &lt;!--Sidebar content--&gt;
+
+        Search: &lt;input ng-model="query"&gt;
+
+      &lt;/div&gt;
+      &lt;div class="span10"&gt;
+        &lt;!--Body content--&gt;
+
+        &lt;ul class="phones"&gt;
+          &lt;li ng-repeat="phone in phones | filter:query"&gt;
+            {{phone.name}}
+            &lt;p&gt;{{phone.snippet}}&lt;/p&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+
+<p>標準HTMLの<code>&lt;input&gt;</code>タグを追加し、<a href="api/ng.directive:ngRepeat"><code>ngRepeat</code></a>ディレクティブへの入力の処理にはAngularの<a href="api/ng.filter:filter"><code>$filter</code></a>関数を使いました。</p>
+
+<p>これでユーザーはスマートフォンリストに対して検索条件を入力し、直ちに検索結果を確認できるようになります。この新しいコードは次のことをしています：</p>
+
+<ul>
+<li><p>データバインディング：これはAngularのコアな機能の１つです。ページが読み込まれると、Angularはインプットボックスの名前をデータモデル内の同じ名前の変数にバインドし、２つを同期した状態に保ちます。</p>
+
+<p>このコードでは、ユーザーがインプットボックスに打ち込んだデータ（<strong><code>query</code></strong>と呼びましょう）は直ちにリストリピーター（<code>phone in phones | filter:</code><strong><code>query</code></strong>）内のフィルターインプットとして使われます。データモデルへの変更がリピーターの入力に変化を生じさせると、リピーターはモデルの現在の状態を反映するためにDOMを効率的に更新します。</p>
+
+<p><img  class="diagram" src="img/tutorial/tutorial_03.png"></p></li>
+<li><p><code>filter</code>フィルターの利用：<a href="api/ng.filter:filter"><code>filter</code></a>関数は<code>query</code>に一致するレコードだけを含む新しい配列を生成するために<code>query</code>の値を使います。</p>
+
+<p><code>ngRepeat</code>は、<code>filter</code>フィルターから返されるスマートフォンの数が変化するのに応じてビューを自動的に更新します。この処理は開発者の目に触れずに行われます。</p></li>
+</ul>
+
+<h3>テスト</h3>
+
+<p>ステップ２では、単体テストの書き方・実行の仕方を学びました。単体テストはコントローラーやJavaScriptで書かれたアプリ内のその他のコンポーネントをテストするのに最適ですが、DOM操作やアプリ内の連携は簡単にはテストできません。こうしたことに関しては、エンドツーエンドのテストの方がずっとましな選択肢になります。</p>
+
+<p>テンプレートやデータバインディングによって検索機能は完全に実装できたので、初めてのエンドツーエンドのテストを書いて、この機能が上手く動くことを確認しましょう。</p>
+
+<p><strong><code>test/e2e/scenarios.js</code>:</strong>
+<pre class="prettyprint linenums">
+describe('PhoneCat App', function() {
+
+  describe('Phone list view', function() {
+
+    beforeEach(function() {
+      browser().navigateTo('../../app/index.html');
+    });
+
+
+    it('should filter the phone list as user types into the search box', function() {
+      expect(repeater('.phones li').count()).toBe(3);
+
+      input('query').enter('nexus');
+      expect(repeater('.phones li').count()).toBe(1);
+
+      input('query').enter('motorola');
+      expect(repeater('.phones li').count()).toBe(2);
+    });
+  });
+});
+</pre>
+
+<p>このテストのシンタックスはJasmineで書かれたコントローラーの単体テストにそっくりですが、エンドツーエンドのテストは<a href="guide/dev_guide.e2e-testing">Angular's end-to-end test runner</a>のAPIを使っています。</p>
+
+<p>エンドツーエンドのテストを実行するには、ブラウザの新しいタブで次のどれかを開きましょう：</p>
+
+<ul>
+<li>node.jsユーザー：<a href="http://localhost:8000/test/e2e/runner.html">http://localhost:8000/test/e2e/runner.html</a></li>
+<li>その他のhttpサーバーのユーザー：<code>http://localhost:[port-number]/[context-path]/test/e2e/runner.html</code></li>
+<li>このページを読んでいるだけの人: <a href="http://angular.github.com/angular-phonecat/step-3/test/e2e/runner.html">http://angular.github.com/angular-phonecat/step-3/test/e2e/runner.html</a></li>
+</ul>
+
+<p>先の章では単体テストを実行するためにTestacularをどう使うかを見ました。でもTestacularはエンドツーエンドのテストを走らせるのにも使えるんです！スクリプト<code>./scripts/e2e-test.sh</code>を使って下さい。エンドツーエンドのテストは遅いので、単体テストの時とは違ってTestacularはテストが終わると終了し、ファイルが変更されるたびに自動で再実行するようなことはありません。テストセットを再実行するには、<code>e2e-test.sh</code>スクリプトをもう一度実行して下さい。</p>
+
+<p>このテストは検索ボックスとリピーターが正常に連携されていることを確認します。Angularにおいてエンドツーエンドのテストを書くのが如何に簡単か見て下さい。これは簡単なテストを例にとってはいますが、機能的で読み易いエンドツーエンドのテストを書くのは本当にこんなに簡単なのです。</p>
+
+<h2>実験</h2>
+
+<ul>
+<li><p><code>{{query}}</code>バインディングを<code>index.html</code>テンプレートに加えてモデル<code>query</code>の現在の値を表示し、インプットボックスにタイプするにつれてそれがどのように変化するのかを見てみましょう。</p></li>
+<li><p>HTMLページのタイトルに表示させる<code>query</code>モデルの現在値がどのように取得できるのか見てみましょう。</p>
+
+<p><code>{{query}}</code>を次のようにただtitleタグの要素に加えればいいと思うかもしれません：</p>
+
+<pre><code>  &lt;title&gt;Google Phone Gallery: {{query}}&lt;/title&gt;
+</code></pre>
+
+<p>でも、ページを再読み込みすると期待した結果は得られません。これは"query"モデルがbody要素で定義されたスコープの中にあるためです。</p>
+
+<pre><code>  &lt;body ng-controller="PhoneListCtrl"&gt;
+</code></pre>
+
+<p>もしも<code>&lt;title&gt;</code>要素からqueryモデルにバインドしたければ、<code>ngController</code>宣言をHTML要素に<strong>移動</strong>しないといけません。なぜならHTML要素はbodyとtitle両方の親だからです：</p>
+
+<pre><code>  &lt;html ng-app ng-controller="PhoneListCtrl"&gt;
+</code></pre>
+
+<p><code>ng-controller</code>宣言をbody要素から<strong>取り除く</strong>ことを忘れないで下さい。</p>
+
+<p>title要素の中での２重中括弧の使用は上手くいきましたが、ページを読み込んでいる一瞬の間、それが実際ユーザーに見えてしまったことに気づいたかもしれません。よりよい方法は<a href="api/ng.directive:ngBind"><code>ngBind</code></a>ディレクティブか<a href="api/ng.directive:ngBindTemplate"><code>ngBindTemplate</code></a>ディレクティブを使うことです。これらはページ読み込み中ユーザーから見えません。</p>
+
+<pre><code>  &lt;title ng-bind-template="Google Phone Gallery: {{query}}"&gt;Google Phone Gallery&lt;/title&gt;
+</code></pre></li>
+<li><p>次のエンドツーエンドのテストを<code>test/e2e/scenarios.js</code>の<code>describe</code>ブロックに追加しましょう：</p>
+
+<pre class="prettyprint linenums">
+    it('should display the current filter value within an element with id "status"',
+        function() {
+      expect(element('#status').text()).toMatch(/Current filter: \s*$/);
+
+      input('query').enter('nexus');
+
+      expect(element('#status').text()).toMatch(/Current filter: nexus\s*$/);
+
+      //alternative version of the last assertion that tests just the value of the binding
+      using('#status').expect(binding('query')).toBe('nexus');
+    });
+  </pre>
+
+<p>エンドツーエンドのテストランナーを開いたブラウザタブを更新してテストが失敗することを確かめましょう。テストを成功させるには<code>index.html</code>テンプレートを編集して、<code>id</code>として<code>"status"</code>、中身に"Current filter:"に続けて<code>query</code>バインディングを持つ<code>div</code>または<code>p</code>要素を追加しましょう。例えば：</p>
+
+<pre><code>  &lt;div id="status"&gt;Current filter: {{query}}&lt;/div&gt;
+</code></pre></li>
+<li><p><code>pause()</code>文をエンドツーエンドのテストの中に追加して、テストを再実行します。ランナーが途中で止まるはずです。これによって、ブラウザに表示されているアプリケーションの状態を調べることができます。アプリは実行中です！検索文字列を変えればこのことが確認できます。エンドツーエンドのテストをトラブルシュートする上でこれはとても役に立ちます。</p></li>
+</ul>
+
+<h2>まとめ</h2>
+
+<p>全文検索と、検索が機能することを確認するためのテストを追加しました！<a href="tutorial/step_04">step 4</a>に進んでスマートフォンアプリにソート機能を追加する方法を学びましょう。</p>
+
+<ul doc-tutorial-nav="3"></ul></div>

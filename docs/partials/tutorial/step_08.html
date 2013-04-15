@@ -1,0 +1,167 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><ul doc-tutorial-nav="8"></ul>
+
+<p>このステップでは、ユーザーがスマートフォンリスト上のスマートフォンをクリックした時に表示される詳細ビューを実装します。</p>
+
+<div doc-tutorial-reset="8">
+</div>
+
+<p>リスト上のスマートフォンをクリックすると、そのスマートフォン固有の情報を持つ詳細ページが表示されます。</p>
+
+<p>スマートフォン詳細ページを実装するため、データを取得するのに<a href="api/ng.$http"><code>$http</code></a>を使います。そしてビューテンプレート<code>phone-detail.html</code>を実際に作っていきます。</p>
+
+<p>主な変更点は以下に挙げます。完全な差分は<a href="https://github.com/angular/angular-phonecat/compare/step-7...step-8">GitHub</a>で見ることができます：</p>
+
+<h3>データ</h3>
+
+<p><code>phones.json</code>の他に、<code>app/phones/</code>ディレクトリにはスマートフォンごとに１つのjsonファイルが入っています：</p>
+
+<p><strong><code>app/phones/nexus-s.json</code>:</strong> (サンプルスニペット)
+<pre class="prettyprint linenums">
+{
+  "additionalFeatures": "Contour Display, Near Field Communications (NFC),...",
+  "android": {
+      "os": "Android 2.3",
+      "ui": "Android"
+  },
+  ...
+  "images": [
+      "img/phones/nexus-s.0.jpg",
+      "img/phones/nexus-s.1.jpg",
+      "img/phones/nexus-s.2.jpg",
+      "img/phones/nexus-s.3.jpg"
+  ],
+  "storage": {
+      "flash": "16384MB",
+      "ram": "512MB"
+  }
+}
+</pre>
+
+<p>それぞれのファイルは、同じデータ構造を使ってスマートフォンの様々な特性を記述しています。このデータをスマートフォン詳細画面に表示します。</p>
+
+<h3>コントローラー</h3>
+
+<p>jsonファイルを取得するために、<code>$http</code>を使って<code>PhoneDetailCtrl</code>を拡張します。これはスマートフォンリストのコントローラーと同じように動きます。</p>
+
+<p><strong><code>app/js/controllers.js</code>:</strong>
+<pre class="prettyprint linenums">
+function PhoneDetailCtrl($scope, $routeParams, $http) {
+  $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+    $scope.phone = data;
+  });
+}
+
+//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];
+</pre>
+
+<p>HTTPリクエストのためのURLを組み立てるため、<code>$route</code>サービスによって現在のルートから取り出される<code>$routeParams.phoneId</code>を使います。</p>
+
+<h3>テンプレート</h3>
+
+<p>TBDプレースホルダーの行は、スマートフォンの詳細を構成するようにリストとバインディングで置き換えました。モデルからビューにスマートフォンデータを射影するために、angularの<code>{{expression}}</code>マークアップと<code>ngRepeat</code>をどこで使っているかに注目して下さい。</p>
+
+<p><strong><code>app/partials/phone-detail.html</code>:</strong>
+<pre class="prettyprint linenums">
+&lt;img ng-src="{{phone.images[0]}}" class="phone"&gt;
+
+&lt;h1&gt;{{phone.name}}&lt;/h1&gt;
+
+&lt;p&gt;{{phone.description}}&lt;/p&gt;
+
+&lt;ul class="phone-thumbs"&gt;
+  &lt;li ng-repeat="img in phone.images"&gt;
+    &lt;img ng-src="{{img}}"&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul class="specs"&gt;
+  &lt;li&gt;
+    &lt;span&gt;Availability and Networks&lt;/span&gt;
+    &lt;dl&gt;
+      &lt;dt&gt;Availability&lt;/dt&gt;
+      &lt;dd ng-repeat="availability in phone.availability"&gt;{{availability}}&lt;/dd&gt;
+    &lt;/dl&gt;
+  &lt;/li&gt;
+    ...
+  &lt;/li&gt;
+    &lt;span&gt;Additional Features&lt;/span&gt;
+    &lt;dd&gt;{{phone.additionalFeatures}}&lt;/dd&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<div style="display: none">
+TODO!
+<img  class="diagram" src="img/tutorial/tutorial_08-09_final.png">
+</div>
+
+<h3>テスト</h3>
+
+<p>ステップ５で<code>PhoneListCtrl</code>コントローラーのために書いたものと似たようなユニットテストを新しく書きました。</p>
+
+<p><strong><code>test/unit/controllersSpec.js</code>:</strong>
+<pre class="prettyprint linenums">
+...
+  describe('PhoneDetailCtrl', function(){
+    var scope, $httpBackend, ctrl;
+
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('phones/xyz.json').respond({name:'phone xyz'});
+
+      $routeParams.phoneId = 'xyz';
+      scope = $rootScope.$new();
+      ctrl = $controller(PhoneDetailCtrl, {$scope: scope});
+    }));
+
+
+    it('should fetch phone detail', function() {
+      expect(scope.phone).toBeUndefined();
+      $httpBackend.flush();
+
+      expect(scope.phone).toEqual({name:'phone xyz'});
+    });
+  });
+...
+</pre>
+
+<p>次の出力をTestacularのタブで確認できるはずです：</p>
+
+<pre><code>Chrome 22.0: Executed 3 of 3 SUCCESS (0.039 secs / 0.012 secs)
+</code></pre>
+
+<p>Nexus Sの詳細ページに遷移しページの見出しが"Nexus S"であることを確認するという新しいエンドツーエンドテストも追加しました。</p>
+
+<p><strong><code>test/e2e/scenarios.js</code>:</strong>
+<pre class="prettyprint linenums">
+...
+  describe('Phone detail view', function() {
+
+    beforeEach(function() {
+      browser().navigateTo('../../app/index.html#/phones/nexus-s');
+    });
+
+
+    it('should display nexus-s page', function() {
+      expect(binding('phone.name')).toBe('Nexus S');
+    });
+  });
+...
+</pre>
+
+<p><code>./scripts/e2e-test.sh</code>を再実行、またはエンドツーエンドテストランナーのブラウザタブを更新してテストの実行を見るか、もしくは<a href="http://angular.github.com/angular-phonecat/step-8/test/e2e/runner.html">Angular's server</a>でテストの実行を見て下さい。</p>
+
+<h2>実験</h2>
+
+<ul>
+<li><a href="guide/dev_guide.e2e-testing">Angularのエンドツーエンドテスト実行API</a>を使って、Nexus Sの詳細ページに４つのサムネイル画像が表示されることを確認するテストを書いて下さい。</li>
+</ul>
+
+<h2>まとめ</h2>
+
+<p>これでスマートフォン詳細画面ができました。<a href="tutorial/step_09">ステップ９</a>に進んでカスタム表示フィルターの書き方を学びましょう。</p>
+
+<ul doc-tutorial-nav="8"></ul></div>
