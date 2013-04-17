@@ -109,13 +109,6 @@ describe("angular+jqlite", function() {
 
 });
 
-  describe("guide/bootstrap", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/guide/bootstrap");
-    });
-  
-});
-
   describe("cookbook/helloworld", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/cookbook/helloworld");
@@ -156,6 +149,13 @@ describe("angular+jqlite", function() {
         element('.board tr:nth-child('+row+') td:nth-child('+col+')').click();
       }
 
+});
+
+  describe("guide/bootstrap", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/guide/bootstrap");
+    });
+  
 });
 
   describe("guide/compiler", function() {
@@ -322,13 +322,6 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("guide/i18n", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/guide/i18n");
-    });
-  
-});
-
   describe("guide/directive", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/guide/directive");
@@ -381,6 +374,13 @@ describe("angular+jqlite", function() {
       })).toBe('Hello World');
     });
 
+});
+
+  describe("guide/i18n", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/guide/i18n");
+    });
+  
 });
 
   describe("guide/forms", function() {
@@ -495,13 +495,6 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("tutorial/index", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/index");
-    });
-  
-});
-
   describe("tutorial/step_05", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/tutorial/step_05");
@@ -509,9 +502,16 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("tutorial/step_00", function() {
+  describe("tutorial/step_06", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_00");
+      browser().navigateTo("index-nocache.html#!/tutorial/step_06");
+    });
+  
+});
+
+  describe("tutorial/index", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/tutorial/index");
     });
   
 });
@@ -537,16 +537,16 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("tutorial/step_01", function() {
+  describe("tutorial/step_00", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_01");
+      browser().navigateTo("index-nocache.html#!/tutorial/step_00");
     });
   
 });
 
-  describe("tutorial/step_06", function() {
+  describe("tutorial/step_01", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_06");
+      browser().navigateTo("index-nocache.html#!/tutorial/step_01");
     });
   
 });
@@ -2413,13 +2413,6 @@ describe("angular+jquery", function() {
 
 });
 
-  describe("guide/bootstrap", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/guide/bootstrap");
-    });
-  
-});
-
   describe("cookbook/helloworld", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/cookbook/helloworld");
@@ -2460,6 +2453,13 @@ describe("angular+jquery", function() {
         element('.board tr:nth-child('+row+') td:nth-child('+col+')').click();
       }
 
+});
+
+  describe("guide/bootstrap", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/guide/bootstrap");
+    });
+  
 });
 
   describe("guide/compiler", function() {
@@ -2626,13 +2626,6 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("guide/i18n", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/guide/i18n");
-    });
-  
-});
-
   describe("guide/directive", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/guide/directive");
@@ -2685,6 +2678,13 @@ describe("angular+jquery", function() {
       })).toBe('Hello World');
     });
 
+});
+
+  describe("guide/i18n", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/guide/i18n");
+    });
+  
 });
 
   describe("guide/forms", function() {
@@ -2799,13 +2799,6 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("tutorial/index", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/index");
-    });
-  
-});
-
   describe("tutorial/step_05", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/tutorial/step_05");
@@ -2813,9 +2806,16 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("tutorial/step_00", function() {
+  describe("tutorial/step_06", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_00");
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_06");
+    });
+  
+});
+
+  describe("tutorial/index", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/index");
     });
   
 });
@@ -2841,16 +2841,16 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("tutorial/step_01", function() {
+  describe("tutorial/step_00", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_01");
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_00");
     });
   
 });
 
-  describe("tutorial/step_06", function() {
+  describe("tutorial/step_01", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_06");
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_01");
     });
   
 });

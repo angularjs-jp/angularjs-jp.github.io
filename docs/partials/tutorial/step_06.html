@@ -3,21 +3,20 @@
 </h1>
 <div><ul doc-tutorial-nav="6"></ul>
 
-<p>In this step, you will add thumbnail images for the phones in the phone list, and links that, for
-now, will go nowhere. In subsequent steps you will use the links to display additional information
-about the phones in the catalog.</p>
+<p>このステップでは、電話のリストにサムネイル画像と、今のところは空のリンクを加えます。
+今後のステップでは、このリンク先で、カタログ内の電話についての詳細情報を表示するように変更します。</p>
 
 <div doc-tutorial-reset="6">
 </div>
 
-<p>You should now see links and images of the phones in the list.</p>
+<p>リンクと電話リスト内にある画像を見てください。</p>
 
-<p>The most important changes are listed below. You can see the full diff on <a href="https://github.com/angular/angular-phonecat/compare/step-5...step-6">GitHub</a>:</p>
+<p>下記に大事な変更を列挙しておきます。完全な差分を見ることもできます<a href="https://github.com/angular/angular-phonecat/compare/step-5...step-6">GitHub</a>:</p>
 
 <h3>Data</h3>
 
-<p>Note that the <code>phones.json</code> file contains unique ids and image urls for each of the phones. The
-urls point to the <code>app/img/phones/</code> directory.</p>
+<p><code>phones.json</code>ファイルはそれぞれの電話にユニークなIDと画像URLが含まれています。
+このURLは<code>app/img/phones/</code>以下をさしています。</p>
 
 <p><strong><code>app/phones/phones.json</code></strong> (sample snippet):
 <pre class="prettyprint linenums">
@@ -48,16 +47,10 @@ urls point to the <code>app/img/phones/</code> directory.</p>
 ...
 </pre>
 
-<p>To dynamically generate links that will in the future lead to phone detail pages, we used the
-now-familiar double-curly brace binding in the <code>href</code> attribute values. In step 2, we added the
-<code>{{phone.name}}</code> binding as the element content. In this step the <code>{{phone.id}}</code> binding is used in
-the element attribute.</p>
+<p>電話詳細ページへのリンクを動的に生成するために、href 属性値の中で、もうおなじみである、2重カーリーブレイスでの変数バインディングを使います。
+step2 では要素のコンテントとして {{phone.name}} を使いました。ここでは {{phone.id}} バインディングを要素の属性内で使います。</p>
 
-<p>We also added phone images next to each record using an image tag with the <a href="api/ng.directive:ngSrc"><code>ngSrc</code></a> directive. That directive prevents the
-browser from treating the angular <code>{{ expression }}</code> markup literally, and initiating a request to
-invalid url <code>http://localhost:8000/app/{{phone.imageUrl}}</code>, which it would have done if we had only
-specified an attribute binding in a regular <code>src</code> attribute (<code>&lt;img  class="diagram" src="{{phone.imageUrl}}"&gt;</code>).
-Using the <code>ngSrc</code> directive prevents the browser from making an http request to an invalid location.</p>
+<p>また、それぞれのレコードの隣に、<a href="api/ng.directive:ngSrc"><code>ngSrc</code></a> ディレクティブを使った画像タグによって、電話画像を表示します。このディレクティブは、ブラウザーが angular の {{ expression }} マークアップを（変数置換無しに）そのまま解釈し、無効な URL である http://localhost:8000/app/{{phone.imageUrl}} へのリクエストを送信することを防ぎます。もし素直に通常の src 属性内で変数バインディングを使用してしまう（<img class="diagram" src="{{phone.imageUrl}}">）と、この無効なリクエストが発生するわけです。ngSrc ディレクティブを使えば無効な場所へブラウザーがリクエストを送信することを防ぎます。</p>
 
 <h3>Test</h3>
 
@@ -72,28 +65,21 @@ Using the <code>ngSrc</code> directive prevents the browser from making an http 
 ...
 </pre>
 
-<p>We added a new end-to-end test to verify that the app is generating correct links to the phone
-views that we will implement in the upcoming steps.</p>
+<p>今後のステップで実装する電話の詳細情報へのリンクが正しく生成されているかを確認する end-to-end テストを加えました。</p>
 
-<p>You can now rerun <code>./scripts/e2e-test.sh</code> or refresh the browser tab with the end-to-end test
-runner to see the tests run, or you can see them running on <a href="http://angular.github.com/angular-phonecat/step-6/test/e2e/runner.html">Angular's server</a>.</p>
+<p>./scripts/e2e-test.sh を再度実行するか、end-to-end テストランナーを表示しているブラウザータブを再読み込みすることでテストが動く様子を見れます。
+テスト結果はこちらで確認できます<a href="http://angular.github.com/angular-phonecat/step-6/test/e2e/runner.html">Angular's server</a>.</p>
 
 <h2>Experiments</h2>
 
 <ul>
-<li><p>Replace the <code>ng-src</code> directive with a plain old <code>src</code> attribute. Using tools such as Firebug,
-or Chrome's Web Inspector, or inspecting the webserver access logs, confirm that the app is indeed
-making an extraneous request to <code>/app/%7B%7Bphone.imageUrl%7D%7D</code> (or
-<code>/app/{{phone.imageUrl}}</code>).</p>
-
-<p>The issue here is that the browser will fire a request for that invalid image address as soon as
-it hits the <code>img</code> tag, which is before Angular has a chance to evaluate the expression and inject
-the valid address.</p></li>
+<li><code>ng-src</code> ディレクティブを従来の src 属性に置き換えてみましょう。Firebug や Chrome の Web Inspector などのツールを使うか、ウェブサーバーのアクセスログを見て、/app/%7B%7Bphone.imageUrl%7D%7D （または /app/{{phone.imageUrl}}）などへ無駄なリクエストを送っていることを確認してみましょう。</li>
 </ul>
+
+<p>この問題は、ブラウザが無効な画像アドレスの img タグを見た瞬間、つまり Angular が式を評価して有効なアドレスをインジェクトする前に、リクエストを送信してしまうことが原因です。</p>
 
 <h2>Summary</h2>
 
-<p>Now that you have added phone images and links, go to <a href="tutorial/step_07">step 7</a> to learn about Angular
-layout templates and how Angular makes it easy to create applications that have multiple views.</p>
+<p>今回は電話画像とリンクをつけました。つぎは <a href="tutorial/step_07">step 7</a> で Angular layout template を学びます。Angular なら簡単に複数の view を持つアプリケーションを作れることを実感してください。</p>
 
 <ul doc-tutorial-nav="6"></ul></div>
