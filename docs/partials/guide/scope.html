@@ -1,39 +1,44 @@
 <h1><code ng:non-bindable=""></code>
 <span class="hint"></span>
 </h1>
-<div><h2>What are Scopes?</h2>
+<div><h2>スコープ (Scope) とは?</h2>
 
-<p><a href="api/ng.$rootScope.Scope"><code>scope</code></a> is an object that refers to the application
-model. It is an execution context for <a href="guide/expression">expressions</a>. Scopes are
-arranged in hierarchical structure which mimic the DOM structure of the application. Scopes can
-watch <a href="guide/expression">expressions</a> and propagate events.</p>
+<p><a href="api/ng.$rootScope.Scope"><code>スコープ</code></a> は、アプリケーションのモデルを参照するオブジェクトです。
+また、 <a href="guide/expression">expressions</a> の実行コンテキストでもあります。
+スコープは、アプリケーションの DOM 構造にならった階層構造で管理され、 
+<a href="guide/expression">expressions</a> を watch したり、イベントを伝播させることができます。</p>
 
-<h3>Scope characteristics</h3>
+<h3>スコープの特徴</h3>
 
 <ul>
-<li><p>Scopes provide APIs (<a href="api/ng.$rootScope.Scope#$watch"><code>$watch</code></a>) to observe
-model mutations.</p></li>
-<li><p>Scopes provide APIs (<a href="api/ng.$rootScope.Scope#$apply"><code>$apply</code></a>) to
-propagate any model changes through the system into the view from outside of the "Angular
-realm" (controllers, services, Angular event handlers).</p></li>
-<li><p>Scopes can be nested to isolate application components while providing access to shared model
-properties. A scope (prototypically) inherits properties from its parent scope.</p></li>
-<li><p>Scopes provide context against which <a href="guide/expression">expressions</a> are evaluated. For
-example <code>{{username}}</code> expression is meaningless, unless it is evaluated against a specific
-scope which defines the <code>username</code> property.</p></li>
+<li><p>スコープは、モデルの変化を検知するための 
+API (<a href="api/ng.$rootScope.Scope#$watch"><code>$watch</code></a>) を提供します。</p></li>
+<li><p>スコープは、 "Angular 領域" (コントローラ・サービス・ Angular イベントハンドラ) の外から、
+モデルの変化をシステム全体の View に伝搬させるための API 
+(<a href="api/ng.$rootScope.Scope#$apply"><code>$apply</code></a>) を提供します。</p></li>
+<li><p>共有のモデルプロパティへのアクセスを提供しつつ、
+アプリケーションのコンポーネントを独立させられるよう、スコープをネストすることができます。
+あるスコープは、親のスコープからプロパティをプロトタイプ継承します。</p></li>
+<li><p>スコープは、 <a href="guide/expression">expression</a> の評価に使われるコンテキストを提供します。
+たとえば、 <code>{{username}}</code> という expression は、 
+<code>username</code> プロパティが定義されている特定のスコープ内で評価されなければ、意味がありません。</p></li>
 </ul>
 
-<h3>Scope as Data-Model</h3>
+<h3>データモデルとしてのスコープ</h3>
 
-<p>Scope is the glue between application controller and the view. During the template <a href="guide/compiler">linking</a> phase the <a href="api/ng.$compileProvider#directive"><code>directives</code></a> set up
-<a href="api/ng.$rootScope.Scope#$watch"><code><code>$watch</code></code></a> expressions on the scope. The
-<code>$watch</code> allows the directives to be notified of property changes, which allows the directive to
-render the updated value to the DOM.</p>
+<p>スコープは、アプリケーションコントローラとビューを結びつける、のりの役割を果たします。
+テンプレートの <a href="guide/compiler">リンク</a> フェーズ中に、 
+<a href="api/ng.$compileProvider#directive"><code>ディレクティブ</code></a> は 
+expression の <a href="api/ng.$rootScope.Scope#$watch"><code><code>$watch</code></code></a> をスコープに設定します。
+<code>$watch</code> が設定されると、 ディレクティブ
+はスコープ内のプロパティが変化したときに通知を受け取ることができるようになり、
+DOM に変更を反映できるようになります。</p>
 
-<p>Both controllers and directives have reference to the scope, but not to each other. This
-arrangement isolates the controller from the directive as well as from DOM. This is an important
-point since it makes the controllers view agnostic, which greatly improves the testing story of
-the applications.</p>
+<p>コントローラもディレクティブも、スコープへの参照を持ちますが、
+コントローラ &lt;-> ディレクティブの相互参照は持っていません。
+このような構成になっているので、コントローラはディレクティブや DOM から分離されることになります。
+これは非常に重要なポイントで、コントローラはビューのことを全く知り得なくなり、
+アプリケーションのテストを大幅に改善することができます。</p>
 
 <h3>Source</h3>
 <div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-76" source-edit-css="" source-edit-js="script.js-75" source-edit-unit="" source-edit-scenario=""></div>
@@ -64,62 +69,69 @@ the applications.</p>
 </div><h3>Demo</h3>
 <div class="well doc-example-live" ng-embed-app="" ng-set-html="index.html-76" ng-eval-javascript="script.js-75"></div>
 
-<p>In the above example notice that the <code>MyController</code> assigns <code>World</code> to the <code>username</code> property of
-the scope. The scope then notifies the <code>input</code> of the assignment, which then renders the input
-with username pre-filled. This demonstrates how a controller can write data into the scope.</p>
+<p>上の例では、 <code>MyController</code> はスコープ内の <code>username</code> プロパティに <code>World</code> という値を代入しています。
+すると、スコープは、代入が行われたことを <code>input</code> に通知し、 <code>input</code> 
+にはユーザ名があらかじめ入力された状態に変わります。
+このように、コントローラはスコープにデータを書き込むことができます。</p>
 
-<p>Similarly the controller can assign behavior to scope as seen by the <code>sayHello</code> method, which is
-invoked when the user clicks on the 'greet' button. The <code>sayHello</code> method can read the <code>username</code>
-property and create a <code>greeting</code> property. This demonstrates that the properties on scope update
-automatically when they are bound to HTML input widgets.</p>
+<p>同様に、コントローラはスコープにビヘイビアを定義することができます。
+上記の例の <code>sayHello</code> メソッドは、ユーザが 'greet' ボタンをクリックしたときに呼び出されます。
+<code>sayHello</code> メソッドは <code>username</code> プロパティを読み取り、 <code>greeting</code> プロパティを生成することができます。
+このように、スコープ内のプロパティは、 HTML 入力部品にバインドされている場合、
+自動的に更新されます。</p>
 
-<p>Logically the rendering of <code>{{greeting}}</code> involves:</p>
+<p><code>{{greeting}}</code> のレンダリングでは、次のようなことが行われています。</p>
 
 <ul>
-<li><p>retrieval of the scope associated with DOM node where <code>{{greeting}}</code> is defined in template.
-In this example this is the same scope as the scope which was passed into <code>MyController</code>. (We
-will discuss scope hierarchies later.)</p></li>
-<li><p>Evaluate the <code>greeting</code> <a href="guide/expression">expression</a> against the scope retrieved above,
-and assign the result to the text of the enclosing DOM element.</p></li>
+<li><p>テンプレートで <code>{{greeting}}</code> が定義されている DOM ノードに関連付けられたスコープを取得します。
+この例では、 <code>MyController</code> に渡されたスコープと同じスコープです。
+(スコープの階層については後ほど解説します。)</p></li>
+<li><p><code>greeting</code> <a href="guide/expression">expression</a> を上記で取得したスコープで評価し、
+結果を内部の DOM 要素のテキストに反映します。</p></li>
 </ul>
 
-<p>You can think of the scope and its properties as the data which is used to render the view. The
-scope is the single source-of-truth for all things view related.</p>
+<p>スコープとそのプロパティは、 ビューを描画するのに使われるデータと考えることができます。
+スコープは、ビューが関連するすべてのデータの本当の値を持つ唯一の存在です。</p>
 
-<p>From a testability point of view, the separation of the controller and the view is desirable, because it allows us
-to test the behavior without being distracted by the rendering details.</p>
+<p>テスト容易性の観点から見ると、コントローラとビューが分離されているのが理想です。
+なぜならば、分離されていれば、描画の詳細まで気にすることなく、
+コントローラの振る舞いをテストできるからです。</p>
 
 <pre class="prettyprint linenums">
   it('should say hello', function() {
     var scopeMock = {};
     var cntl = new MyController(scopeMock);
 
-    // Assert that username is pre-filled
+    // username があらかじめ入力されていることを assert する
     expect(scopeMock.username).toEqual('World');
 
-    // Assert that we read new username and greet
+    // 変更された username と greeting を取得できることを assert する
     scopeMock.username = 'angular';
     scopeMock.sayHello();
     expect(scopeMock.greeting).toEqual('Hello angular!');
   });
 </pre>
 
-<h3>Scope Hierarchies</h3>
+<h3>スコープの階層構造</h3>
 
-<p>Each Angular application has exactly one <a href="api/ng.$rootScope"><code>root scope</code></a>, but
-may have several child scopes.</p>
+<p>Angular アプリケーションはそれぞれ 1 つだけ <a href="api/ng.$rootScope"><code>ルートスコープ</code></a> 
+を持っていますが、複数の子スコープを持つことができます。</p>
 
-<p>The application can have multiple scopes, because some <a href="guide/directive">directives</a> create
-new child scopes (refer to directive documentation to see which directives create new scopes).
-When new scopes are created, they are added as children of their parent scope. This creates a tree
-structure which parallels the DOM where they're attached</p>
+<p>ディレクティブの中には、新たな子スコープを生成するものがあるため、
+アプリケーションは複数のスコープを持つことができます。
+(どのディレクティブが新規のスコープを生成するかは、
+各ディレクティブのドキュメントを参照してください。)
+新規のスコープが生成されると、親スコープの子として追加されます。
+このようにして、スコープがアタッチされている DOM にしたがった、
+スコープのツリー構造ができあがります。</p>
 
-<p>When Angular evaluates <code>{{username}}</code>, it first looks at the scope associated with the given
-element for the <code>username</code> property. If no such property is found, it searches the parent scope
-and so on until the root scope is reached. In JavaScript this behavior is known as prototypical
-inheritance, and child scopes prototypically inherit from their parents.</p>
+<p>Angular が <code>{{username}}</code> を評価するとき、まず最初にその要素に関連付けられているスコープの中から、
+<code>username</code> プロパティを探します。
+もしプロパティが見つからなければ、ルートスコープに到達するまで親スコープをたどります。
+JavaScriptでは、このような振る舞いはプロトタイプ継承と呼ばれ、
+子スコープは親スコープをプロトタイプ継承します。</p>
 
-<p>This example illustrates scopes in application, and prototypical inheritance of properties.</p>
+<p>次の例は、アプリケーションの中でのスコープとプロパティのプロトタイプ継承を説明するものです。</p>
 
 <h3>Source</h3>
 <div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-79" source-edit-css="style.css-77" source-edit-js="script.js-78" source-edit-unit="" source-edit-scenario=""></div>
@@ -142,7 +154,7 @@ inheritance, and child scopes prototypically inherit from their parents.</p>
 <div class="tab-pane" title="style.css">
 <pre class="prettyprint linenums" ng-set-text="style.css-77"></pre>
 <style type="text/css" id="style.css-77">
-    /* remove .doc-example-live in jsfiddle */
+    /* jsfiddle では .doc-example-live を削除 */
     .doc-example-live .ng-scope {
       border: 1px dashed red;
     }
@@ -166,35 +178,46 @@ inheritance, and child scopes prototypically inherit from their parents.</p>
 </div><h3>Demo</h3>
 <div class="well doc-example-live" ng-embed-app="" ng-set-html="index.html-79" ng-eval-javascript="script.js-78"></div>
 
-<p>Notice that Angular automatically places <code>ng-scope</code> class on elements where scopes are
-attached. The <code>&lt;style&gt;</code> definition in this example highlights in red the new scope locations. The
-child scopes are necessary because the repeater evaluates <code>{{employee.name}}</code> expression, but
-depending on which scope the expression is evaluated it produces different result. Similarly the
-evaluation of <code>{{department}}</code> prototypically inherits from root scope, as it is the only place
-where the <code>department</code> property is defined.</p>
+<p>Angular は、スコープがアタッチされたエレメントに、 <code>ng-scope</code> 
+クラスを自動的に付加することに注目してください。
+この例の <code>&lt;style&gt;</code> 定義は、新しいスコープの位置を赤枠でハイライトします。</p>
 
-<h3>Retrieving Scopes from the DOM.</h3>
+<p>子スコープ(内部の赤枠)は、<code>{{employee.name}}</code> expression を評価するために 
+repeater が作成しますが、 expression が評価される子スコープによって、 
+<code>{{employee.name}}</code> expression の評価結果は異なります。
+(John Smith と Mary Run は、異なる子スコープで <code>{{employee.name}}</code> expression 
+が評価された結果です。)</p>
 
-<p>Scopes are attached to the DOM as <code>$scope</code> data property, and can be retrieved for debugging
-purposes. (It is unlikely that one would need to retrieve scopes in this way inside the
-application.) The location where the root scope is attached to the DOM is defined by the location
-of <a href="api/ng.directive:ngApp"><code><code>ng-app</code></code></a> directive. Typically
-<code>ng-app</code> is placed an the <code>&lt;html&gt;</code> element, but it can be placed on other elements as well, if,
-for example, only a portion of the view needs to be controlled by Angular.</p>
+<p>また、<code>{{department}}</code> の評価を行うときは、 <code>department</code> 
+プロパティがルートスコープでしか定義されていないため、
+ルートスコープからプロトタイプ継承されます。</p>
 
-<p>To examine the scope in the debugger:</p>
+<h3>DOM からのスコープの取得</h3>
+
+<p>スコープは <code>$scope</code> data プロパティとして DOM にアタッチされていて、
+デバッグの目的で取得することができます。
+(アプリケーションの中でこのような方法を使ってスコープを取得しなければならないことは、
+まずありえないでしょう。)
+ルートスコープがアタッチされる DOM 要素は、 <a href="api/ng.directive:ngApp"><code><code>ng-app</code></code></a> 
+ディレクティブの位置によって決まります。たいていの場合、 <code>ng-app</code> は <code>&lt;html&gt;</code> 
+要素に置かれますが、たとえば View の一部分のみを Angular がコントロールするような場合は、
+別の要素に <code>ng-app</code> を置くことができます。</p>
+
+<p>デバッガでスコープを調べるためには、次のようにします。</p>
 
 <ol>
-<li><p>right click on the element of interest in your browser and select 'inspect element'. You
-should see the browser debugger with the element you clicked on highlighted.</p></li>
-<li><p>The debugger allows you to access the currently selected element in the console as <code>$0</code>
-variable.</p></li>
-<li><p>To retrieve the associated scope in console execute: <code>angular.element($0).scope()</code></p></li>
+<li><p>ブラウザで、調査したい要素を右クリックし、「要素を検証」をクリックします。
+ ブラウザのデバッガで、右クリックした要素がハイライトされるはずです。</p></li>
+<li><p>デバッグコンソールでは、選択した要素は <code>$0</code> 変数としてアクセスできます。</p></li>
+<li><p>アタッチされたスコープを取得するには、コンソールで <code>angular.element($0).scope()</code>
+ を実行します。</p></li>
 </ol>
 
-<h3>Scope Events Propagation</h3>
+<h3>スコープイベントの伝播</h3>
 
-<p>Scopes can propagate events in similar fashion to DOM events. The event can be <a href="api/ng.$rootScope.Scope#$broadcast"><code>broadcasted</code></a> to the scope children or <a href="api/ng.$rootScope.Scope#$emit"><code>emitted</code></a> to scope parents.</p>
+<p>DOM イベントと似た方法で、スコープはイベントを伝播することができます。
+イベントは子スコープに <a href="api/ng.$rootScope.Scope#$broadcast"><code>broadcast</code></a> することができ、
+また、親スコープに <a href="api/ng.$rootScope.Scope#$emit"><code>emit</code></a> することができます。</p>
 
 <h3>Source</h3>
 <div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-81" source-edit-css="" source-edit-js="script.js-80" source-edit-unit="" source-edit-scenario=""></div>
@@ -233,96 +256,116 @@ variable.</p></li>
 </div><h3>Demo</h3>
 <div class="well doc-example-live" ng-embed-app="" ng-set-html="index.html-81" ng-eval-javascript="script.js-80"></div>
 
-<h3>Scope Life Cycle</h3>
+<h3>スコープのライフサイクル</h3>
 
-<p>The normal flow of a browser receiving an event is that it executes a corresponding JavaScript
-callback. Once the callback completes the browser re-renders the DOM and returns to waiting for
-more events.</p>
+<p>ブラウザがイベントを受け取ったとき、イベントに対応する JavaScript 
+のコールバック処理を実行し、コールバック処理が終了すれば、 DOM を再描画してリターンし、
+次のイベントを待つ、というのが通常のフローです。</p>
 
-<p>When the browser calls into JavaScript the code executes outside the Angular execution context,
-which means that Angular is unaware of model modifications. To properly process model
-modifications the execution has to enter the Angular execution context using the <a href="api/ng.$rootScope.Scope#$apply"><code><code>$apply</code></code></a> method. Only model modifications which
-execute inside the <code>$apply</code> method will be properly accounted for by Angular. For example if a
-directive listens on DOM events, such as <a href="api/ng.directive:ngClick"><code><code>ng-click</code></code></a> it must evaluate the
-expression inside the <code>$apply</code> method.</p>
+<p>ブラウザが JavaScript を呼び出したとき、コードは Angular の実行コンテキスト外で動作します。
+したがって、 Angular はモデルに変更があったことを知ることができません。
+モデルの変更を正しく処理するためには、このプロセスが <a href="api/ng.$rootScope.Scope#$apply"><code><code>$apply</code></code></a> メソッドを呼び出して Angular 
+の実行コンテキストに入る必要があります。
+Angular は <code>$apply</code> メソッド内で実行されたモデルの変更のみ適切に処理します。
+たとえば、もしディレクティブが <a href="api/ng.directive:ngClick"><code><code>ng-click</code></code></a> のような 
+DOM イベントを listen している場合、 <code>$apply</code> メソッドの中で expression 
+を評価しなければなりません。</p>
 
-<p>After evaluating the expression, the <code>$apply</code> method performs a <a href="api/ng.$rootScope.Scope#$digest"><code><code>$digest</code></code></a>. In the $digest phase the scope examines all
-of the <code>$watch</code> expressions and compares them with the previous value. This dirty checking is done
-asynchronously. This means that assignment such as <code>$scope.username="angular"</code> will not
-immediately cause a <code>$watch</code> to be notified, instead the <code>$watch</code> notification is delayed until
-the <code>$digest</code> phase. This delay is desirable, since it coalesces multiple model updates into one
-<code>$watch</code> notification as well as it guarantees that during the <code>$watch</code> notification no other
-<code>$watch</code>es are running. If a <code>$watch</code> changes the value of the model, it will force additional
-<code>$digest</code> cycle.</p>
+<p>expression を評価した後、 <code>$apply</code> メソッドは <a href="api/ng.$rootScope.Scope#$digest"><code><code>$digest</code></code></a> を実行します。 <code>$digest</code> フェーズでは、
+スコープがすべての <code>$watch</code> expression を検査し、それまでの値と比較します。
+このダーティチェックは非同期で実行されます。
+したがって、 <code>$scope.username="angular"</code> のような代入が行われても、ただちには <code>$watch</code> 
+に通知されず、 <code>$digest</code> フェーズが実行されるまで遅延されます。
+この遅延は意図的なもので、これにより、複数のモデル変更が 1 つの <code>$watch</code> への通知に集約され、
+かつ、 他の <code>$watch</code> が動作しているしているときには、 <code>$watch</code> 
+への通知が発生しないということが保証されます。
+もし <code>$watch</code> がモデルの値を変更したときは、さらに <code>$digest</code> サイクルを行うことが強制されます。</p>
 
 <ol>
-<li><p><strong>Creation</strong></p>
+<li><p><strong>スコープの生成</strong></p>
 
-<p>The <a href="api/ng.$rootScope"><code>root scope</code></a> is created during the application
- bootstrap by the <a href="api/AUTO.$injector"><code>$injector</code></a>. During template
- linking, some directives create new child scopes.</p></li>
-<li><p><strong>Watcher registration</strong></p>
+<p><a href="api/ng.$rootScope"><code>ルートスコープ</code></a> がアプリケーションのブートストラップ中に 
+ <a href="api/AUTO.$injector"><code>$injector</code></a>によって生成されます。
+ また、テンプレートのリンク中に、いくつかのディレクティブは新規の子スコープを生成します。</p></li>
+<li><p><strong>Watcher の登録</strong></p>
 
-<p>During template linking directives register <a href="api/ng.$rootScope.Scope#$watch"><code>watches</code></a> on the scope. These watches will be
- used to propagate model values to the DOM.</p></li>
-<li><p><strong>Model mutation</strong></p>
+<p>テンプレートのリンク中に、ディレクティブは <a href="api/ng.$rootScope.Scope#$watch"><code>watch</code></a> 
+ をスコープに登録します。これらの watch はモデルの値を DOM に伝播するために使われます。</p></li>
+<li><p><strong>モデルの変化</strong></p>
 
-<p>For mutations to be properly observed, you should make them only within the <a href="api/ng.$rootScope.Scope#$apply"><code>scope.$apply()</code></a>. (Angular APIs do this
- implicitly, so no extra <code>$apply</code> call is needed when doing synchronous work in controllers,
- or asynchronous work with <a href="api/ng.$http"><code>$http</code></a> or <a href="api/ng.$timeout"><code>$timeout</code></a> services.</p></li>
-<li><p><strong>Mutation observation</strong></p>
+<p>プロパティの変化を適切に検知するため、プロパティへの変更は 
+ <a href="api/ng.$rootScope.Scope#$apply"><code>scope.$apply()</code></a> の中でのみ行うようにしなければなりません。
+ (Angular の API はこれを暗黙的に行なっているため、コントローラでの同期的処理や 
+ <a href="api/ng.$http"><code>$http</code></a> ・ <a href="api/ng.$timeout"><code>$timeout</code></a> サービスを使った非同期処理で 
+ <code>$apply</code> を呼び出す必要はありません。)</p></li>
+<li><p><strong>変化の検知</strong></p>
 
-<p>At the end <code>$apply</code>, Angular performs a <a href="api/ng.$rootScope.Scope#$digest"><code>$digest</code></a> cycle on the root scope, which then propagates throughout all child scopes. During
- the <code>$digest</code> cycle, all <code>$watch</code>ed expressions or functions are checked for model mutation
- and if a mutation is detected, the <code>$watch</code> listener is called.</p></li>
-<li><p><strong>Scope destruction</strong></p>
+<p><code>$apply</code> の最後に、 Angular は <a href="api/ng.$rootScope.Scope#$digest"><code>$digest</code></a> 
+ 処理をルートスコープに対して実行します。
+ ルートスコープで <code>$digest</code> が実行されると、すべての子スコープにも伝播し、 
+ <code>$digest</code> が実行されます。
+ <code>$digest</code> 処理の中で、すべての <code>$watch</code> されている expression や関数について、
+ モデルの変化がチェックされ、もし変化が検知されたら、 <code>$watch</code> のリスナが呼び出されます。</p></li>
+<li><p><strong>スコープの破棄</strong></p>
 
-<p>When child scopes are no longer needed, it is the responsibility of the child scope creator
- to destroy them via <a href="api/ng.$rootScope.Scope#$destroy"><code>scope.$destroy()</code></a>
- API. This will stop propagation of <code>$digest</code> calls into the child scope and allow for memory
- used by the child scope models to be reclaimed by the garbage collector.</p></li>
+<p>子スコープが不要になったら、子スコープの creator は、責任をもって 
+ <a href="api/ng.$rootScope.Scope#$destroy"><code>scope.$destroy()</code></a> API を呼び出し、
+ それらを破棄しなければなりません。破棄することで、子スコープへの <code>$digest</code> 
+ 呼び出しの伝播を止めることができ、子スコープが使用していたメモリが、
+ ガベージコレクタによって開放されます。</p></li>
 </ol>
 
-<h4>Scopes and Directives</h4>
+<h4>スコープとディレクティブ</h4>
 
-<p>During the compilation phase, the <a href="guide/compiler">compiler</a> matches <a href="api/ng.$compileProvider#directive"><code>directives</code></a> against the DOM template. The directives
-usually fall into one of two categories:</p>
-
-<ul>
-<li><p>Observing <a href="api/ng.$compileProvider#directive"><code>directives</code></a>, such as
-double-curly expressions <code>{{expression}}</code>, register listeners using the <a href="api/ng.$rootScope.Scope#$watch"><code>$watch()</code></a> method. This type of directive needs
-to be notified whenever the expression changes so that it can update the view.</p></li>
-<li><p>Listener directives, such as <a href="api/ng.directive:ngClick"><code>ng-click</code></a>, register a listener with the DOM. When the DOM listener fires, the directive
-executes the associated expression and updates the view using the <a href="api/ng.$rootScope.Scope#$apply"><code>$apply()</code></a> method.</p></li>
-</ul>
-
-<p>When an external event (such as a user action, timer or XHR) is received, the associated <a href="guide/expression">expression</a> must be applied to the scope through the <a href="api/ng.$rootScope.Scope#$apply"><code>$apply()</code></a> method so that all listeners are updated
-correctly.</p>
-
-<h4>Directives that Create Scopes</h4>
-
-<p>In most cases, <a href="api/ng.$compileProvider#directive"><code>directives</code></a> and scopes interact
-but do not create new instances of scope. However, some directives, such as <a href="api/ng.directive:ngController"><code>ng-controller</code></a> and <a href="api/ng.directive:ngRepeat"><code>ng-repeat</code></a>, create new child scopes
-and attach the child scope to the corresponding DOM element. You can retrieve a scope for any DOM
-element by using an <code>angular.element(aDomElement).scope()</code> method call.</p>
-
-<h4>Controllers and Scopes</h4>
-
-<p>Scopes and controllers interact with each other in the following situations:</p>
+<p>コンパイル処理中に、 <a href="guide/compiler">コンパイラ</a> は DOM テンプレートから
+<a href="api/ng.$compileProvider#directive"><code>ディレクティブ</code></a> を検索します。
+ディレクティブはたいてい次の 2 カテゴリのうちの 1 つに分類できます。</p>
 
 <ul>
-<li><p>Controllers use scopes to expose controller methods to templates (see <a href="api/ng.directive:ngController"><code>ng-controller</code></a>).</p></li>
-<li><p>Controllers define methods (behavior) that can mutate the model (properties on the scope).</p></li>
-<li><p>Controllers may register <a href="api/ng.$rootScope.Scope#$watch"><code>watches</code></a> on
- the model. These watches execute immediately after the controller behavior executes.</p></li>
+<li><p>Observing <a href="api/ng.$compileProvider#directive"><code>ディレクティブ</code></a>: 
+<code>{{expression}}</code> のようなディレクティブは、
+<a href="api/ng.$rootScope.Scope#$watch"><code>$watch()</code></a> メソッドを使用してリスナを登録します。
+このタイプのディレクティブは、 <code>expression</code> が更新されたときに View を更新できるように、
+通知を受け取る必要があります。</p></li>
+<li><p>Listener ディレクティブ: <a href="api/ng.directive:ngClick"><code>ng-click</code></a> のようなディレクティブは、
+DOM にリスナを登録します。
+DOM リスナが呼び出されたとき、 Listener ディレクティブは関連付けられた expression を実行し、
+<a href="api/ng.$rootScope.Scope#$apply"><code>$apply()</code></a> メソッドを使って View を更新します。</p></li>
 </ul>
 
-<p>See the <a href="api/ng.directive:ngController"><code>ng-controller</code></a> for more
-information.</p>
+<p>外部イベント (ユーザアクション・タイマー・XHRなど) を受け取ったとき、
+スコープ内のすべてのリスナが適切に呼びだされるように、
+<a href="api/ng.$rootScope.Scope#$apply"><code>$apply()</code></a> メソッドを通じて、
+関連付けられた <a href="guide/expression">expression</a> をスコープに適用しなければなりません。</p>
 
-<h4>Scope <code>$watch</code> Performance Considerations</h4>
+<h4>スコープを作成するディレクティブ</h4>
 
-<p>Dirty checking the scope for property changes is a common operation in Angular and for this reason
-the dirty checking function must be efficient. Care should be taken that the dirty checking
-function does not do any DOM access, as DOM access is orders of magnitude slower then property
-access on JavaScript object.</p></div>
+<p>多くの場合、<a href="api/ng.$compileProvider#directive"><code>ディレクティブ</code></a> とスコープは連携しますが、
+ディレクティブがスコープのインスタンスを新しく作成することは、あまりありません。
+しかし、ディレクティブの中には、<a href="api/ng.directive:ngController"><code>ng-controller</code></a> や 
+<a href="api/ng.directive:ngRepeat"><code>ng-repeat</code></a> のように、新しい子スコープを作成して対応する 
+DOM 要素にアタッチするものもあります。
+DOM 要素にアタッチされたスコープは、 <code>angular.element(aDomElement).scope()</code> 
+メソッドを呼び出して取得することができます。</p>
+
+<h4>コントローラとスコープ</h4>
+
+<p>スコープとディレクティブは、次のような場合に連携します。</p>
+
+<ul>
+<li><p>テンプレートに対してコントローラのメソッドを公開するために、コントローラがスコープを使用する場合。
+ (<a href="api/ng.directive:ngController"><code>ng-controller</code></a> を参照)</p></li>
+<li><p>モデル (スコープ内のプロパティ) を操作できるメソッド (ビヘイビア) を、コントローラが定義する場合。</p></li>
+<li><p>コントローラがモデルに対して <a href="api/ng.$rootScope.Scope#$watch"><code>watch</code></a> 
+ を登録する場合。
+ これらの watch は、コントローラのビヘイビアが実行された後すぐに実行されます。</p></li>
+</ul>
+
+<p>詳しくは、 <a href="api/ng.directive:ngController"><code>ng-controller</code></a> をご参照ください。</p>
+
+<h4>スコープの <code>$watch</code> のパフォーマンスについて</h4>
+
+<p>スコープをダーティチェックし、プロパティが変化したかを調べる処理は Angular ではよく行うものなので、
+効率的である必要があります。
+注意しなければならないのは、ダーティーチェック処理が DOM アクセスを行わないようにすることです。
+これは、DOM アクセスが JavaScript のプロパティへのアクセスに比べて桁違いに遅いためです。</p></div>

@@ -1,9 +1,8 @@
 <h1><code ng:non-bindable=""></code>
 <span class="hint"></span>
 </h1>
-<div><p>A web application's main purpose is to present and gather data. For this reason Angular strives
-to make both of these operations trivial. This example shows off how you can build a simple form to
-allow a user to enter data.</p>
+<div><p>ウェブアプリケーションの主な目的は、データの表示および収集です。このため、AngularJSではデータの表示および収集を
+簡単にするよう務めています。この例では、ユーザーがデータを入力できる簡単なフォームを作成する方法を示しています。</p>
 
 <h3>Source</h3>
 <div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-7" source-edit-css="" source-edit-js="script.js-6" source-edit-unit="" source-edit-scenario="scenario.js-8"></div>
@@ -109,17 +108,13 @@ allow a user to enter data.</p>
 </div><h3>Demo</h3>
 <div class="well doc-example-live" ng-embed-app="" ng-set-html="index.html-7" ng-eval-javascript="script.js-6"></div>
 
-<h2>Things to notice</h2>
+<h2>注目すべき事</h2>
 
 <ul>
-<li>The user data model is initialized <a href="api/ng.directive:ngController"><code>controller</code></a> and is
-available in the <a href="api/ng.$rootScope.Scope"><code>scope</code></a> with the initial data.</li>
-<li>For debugging purposes we have included a debug view of the model to better understand what
-is going on.</li>
-<li>The <a href="api/ng.directive:input"><code>input directives</code></a> simply refer
-to the model and are data-bound.</li>
-<li>The inputs validate. (Try leaving them blank or entering non digits in the zip field)</li>
-<li>In your application you can simply read from or write to the model and the form will be updated.</li>
-<li>By clicking the 'add' link you are adding new items into the <code>user.contacts</code> array which are then
-reflected in the view.</li>
+<li>ユーザーデータモデルは<a href="api/ng.directive:ngController"><code>コントローラ</code></a>で初期化され、初期データとともに<a href="api/ng.$rootScope.Scope"><code>スコープ</code></a>を通して利用可能です。</li>
+<li>デバッグのため、何が起こっているのかをより理解するためモデルのデバッグビューを含んでいます。</li>
+<li><a href="api/ng.directive:input"><code>インプットディレクティブ</code></a> は単にモデルを参照し、入力欄とモデルのデータを同期させます。</li>
+<li>入力値のバリデーションが行われます。（郵便番号の入力欄を空のままにしておくか、数値以外を入力して試してみてください。）</li>
+<li>アプリケーションの中で、モデルの値を読み書きすることができ、それがフォームに反映されます。</li>
+<li>「add」というリンクをクリックすることで、user.contactsプロパティに対し項目を追加することができ、フォームのビューにも入力欄が追加されます。</li>
 </ul></div>

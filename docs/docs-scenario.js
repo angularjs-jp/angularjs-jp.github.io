@@ -142,7 +142,7 @@ describe("angular+jqlite", function() {
        piece(1, 2);
        piece(3, 2);
        piece(1, 3);
-       expect(element('.winner').text()).toEqual('Player X has won!');
+       expect(element('.winner').text()).toEqual('プレイヤXの勝ち!');
       });
     
       function piece(row, col) {
@@ -376,16 +376,16 @@ describe("angular+jqlite", function() {
 
 });
 
-  describe("guide/i18n", function() {
+  describe("guide/forms", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/guide/i18n");
+      browser().navigateTo("index-nocache.html#!/guide/forms");
     });
   
 });
 
-  describe("guide/forms", function() {
+  describe("guide/i18n", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/guide/forms");
+      browser().navigateTo("index-nocache.html#!/guide/i18n");
     });
   
 });
@@ -446,13 +446,6 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("misc/started", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/misc/started");
-    });
-  
-});
-
   describe("misc/contribute", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/misc/contribute");
@@ -470,6 +463,34 @@ describe("angular+jqlite", function() {
   describe("misc/faq", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/misc/faq");
+    });
+  
+});
+
+  describe("misc/started", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/misc/started");
+    });
+  
+});
+
+  describe("tutorial/index", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/tutorial/index");
+    });
+  
+});
+
+  describe("tutorial/step_00", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/tutorial/step_00");
+    });
+  
+});
+
+  describe("tutorial/step_01", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-nocache.html#!/tutorial/step_01");
     });
   
 });
@@ -509,9 +530,9 @@ describe("angular+jqlite", function() {
   
 });
 
-  describe("tutorial/index", function() {
+  describe("tutorial/step_07", function() {
     beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/index");
+      browser().navigateTo("index-nocache.html#!/tutorial/step_07");
     });
   
 });
@@ -533,27 +554,6 @@ describe("angular+jqlite", function() {
   describe("tutorial/step_10", function() {
     beforeEach(function() {
       browser().navigateTo("index-nocache.html#!/tutorial/step_10");
-    });
-  
-});
-
-  describe("tutorial/step_00", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_00");
-    });
-  
-});
-
-  describe("tutorial/step_01", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_01");
-    });
-  
-});
-
-  describe("tutorial/step_07", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-nocache.html#!/tutorial/step_07");
     });
   
 });
@@ -2446,7 +2446,7 @@ describe("angular+jquery", function() {
        piece(1, 2);
        piece(3, 2);
        piece(1, 3);
-       expect(element('.winner').text()).toEqual('Player X has won!');
+       expect(element('.winner').text()).toEqual('プレイヤXの勝ち!');
       });
     
       function piece(row, col) {
@@ -2680,16 +2680,16 @@ describe("angular+jquery", function() {
 
 });
 
-  describe("guide/i18n", function() {
+  describe("guide/forms", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/guide/i18n");
+      browser().navigateTo("index-jq-nocache.html#!/guide/forms");
     });
   
 });
 
-  describe("guide/forms", function() {
+  describe("guide/i18n", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/guide/forms");
+      browser().navigateTo("index-jq-nocache.html#!/guide/i18n");
     });
   
 });
@@ -2750,13 +2750,6 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("misc/started", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/misc/started");
-    });
-  
-});
-
   describe("misc/contribute", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/misc/contribute");
@@ -2774,6 +2767,34 @@ describe("angular+jquery", function() {
   describe("misc/faq", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/misc/faq");
+    });
+  
+});
+
+  describe("misc/started", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/misc/started");
+    });
+  
+});
+
+  describe("tutorial/index", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/index");
+    });
+  
+});
+
+  describe("tutorial/step_00", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_00");
+    });
+  
+});
+
+  describe("tutorial/step_01", function() {
+    beforeEach(function() {
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_01");
     });
   
 });
@@ -2813,9 +2834,9 @@ describe("angular+jquery", function() {
   
 });
 
-  describe("tutorial/index", function() {
+  describe("tutorial/step_07", function() {
     beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/index");
+      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_07");
     });
   
 });
@@ -2837,27 +2858,6 @@ describe("angular+jquery", function() {
   describe("tutorial/step_10", function() {
     beforeEach(function() {
       browser().navigateTo("index-jq-nocache.html#!/tutorial/step_10");
-    });
-  
-});
-
-  describe("tutorial/step_00", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_00");
-    });
-  
-});
-
-  describe("tutorial/step_01", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_01");
-    });
-  
-});
-
-  describe("tutorial/step_07", function() {
-    beforeEach(function() {
-      browser().navigateTo("index-jq-nocache.html#!/tutorial/step_07");
     });
   
 });
