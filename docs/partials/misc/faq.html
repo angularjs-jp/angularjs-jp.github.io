@@ -3,204 +3,205 @@
 </h1>
 <div><h2>FAQ</h2>
 
-<h3>Questions</h3>
+<h3>質問一覧</h3>
 
-<h4>Why is this project called "AngularJS"? Why is the namespace called "ng"?</h4>
+<h4>なぜこのプロジェクトは"AngularJS"というのですか？なぜ名前空間は"ng"と呼ぶのですか？</h4>
 
-<p>Because HTML has Angular brackets and "ng" sounds like "Angular".</p>
+<p>HTMLには山括弧(Angular brackets)があるし、"ng"は"Angular"らしく聞こえるからです。</p>
 
-<h4>Is AngularJS a library, framework, plugin or a browser extension?</h4>
+<h4>AngularJSはライブラリーですか、フレームワークですか、プラグインですか、ブラウザの拡張機能ですか？</h4>
 
-<p>AngularJS fits the definition of a framework the best, even though it's much more lightweight than
-a typical framework and that's why many confuse it with a library.</p>
+<p>AngularJSはフレームワークの定義が一番馴染みますが、標準的なフレームワークよりもずっと軽量であり、
+それゆえ多くの人がそれをライブラリーと混同します。</p>
 
-<p>AngularJS is 100% JavaScript, 100% client side and compatible with both desktop and mobile browsers.
-So it's definitely not a plugin or some other native browser extension.</p>
+<p>AngularJSは100％JavaScriptで書かれており、100％クライアントサイドでありデスクトップとモバイルブラウザーで互換性があります。
+ですからそれはもちろんプラグインでもその他のなんらかのブラウザのネイティブ拡張機能でもありません。</p>
 
-<h4>Is AngularJS a templating system?</h4>
+<h4>AngularJSはテンプレートシステムなのですか?</h4>
 
-<p>At the highest level, Angular does look like a just another templating system. But there is one
-important reason why the Angular templating system is different, that makes it very good fit for
-application development: bidirectional data binding. The template is compiled in the browser and
-the compilation step produces a live view. This means you, the developers, don't need to write
-code to constantly sync the view with the model and the model with the view as in other
-templating systems.</p>
+<p>最も高いレベルでは、Angularは確かに単なる新たなテンプレートシステムのように見えます。しかしAngularJSは
+一つの重要な理由により異なっており、それがAngularJSをアプリケーション開発にとても適したものにしています。
+双方向データバインディングです。テンプレートはブラウザでコンパイルされ、そのコンパイルステップは生きたviewを
+もたらします。これはあなた方開発者は、他のテンプレートシステムの使用時のようなviewとmodelを常時同期させる
+コードを書く必要がないということです。</p>
 
-<h4>Do I need to worry about security holes in AngularJS?</h4>
+<h4>AngularJSにセキュリティホールがあるか心配する必要はありますか？</h4>
 
-<p>Like any other technology, AngularJS is not impervious to attack. Angular does, however, provide
-built-in protection from basic security holes including cross-site scripting and HTML injection
-attacks. AngularJS does round-trip escaping on all strings for you and even offers XSRF protection
-for server-side communication.</p>
+<p>他のどんなテクノロジーとも同じように、AngularJSも攻撃に対し鉄壁というわけではありません。Angularは、
+しかしながら、クロスサイトスクリプティングやHTMLインジェクション攻撃を含む基本的なセキュリティホールに対する
+組み込みの対策を提供します。強調しますが、AngularJSは開発者のためにすべての文字列に対し往復エスケープしますし、
+サーバーサイド通信のためにXSRF対策さえも提供します。</p>
 
-<p>AngularJS was designed to be compatible with other security measures like Content Security Policy
-(CSP), HTTPS (SSL/TLS) and server-side authentication and authorization that greatly reduce the
-possible attack vectors and we highly recommended their use.</p>
+<p>AngularJSは、他のセキュリティ対策、例えばコンテンツセキュリティポリシー (CSP)、HTTPS (SSL/TLS)、
+そしてサーバーサイドの認証と証明書といった、有りうる攻撃経路を大いに減らすためのもの両立するように設計されました。
+我々はそれらを利用することを強くおすすめします。</p>
 
-<h4>Can I download the source, build, and host the AngularJS environment locally?</h4>
+<h4>ソースコードをダウンロードし、ビルドし、ローカルでAngularJSの環境をホストできますか？</h4>
 
-<p>Yes. See instructions in <a href="misc/downloading">downloading</a>.</p>
+<p>はい。こちらの説明をご覧ください。<a href="misc/downloading">downloading</a>.</p>
 
-<h4>What browsers does Angular work with?</h4>
+<h4>どのブラウザーで動作しますか？</h4>
 
-<p>We run our extensive test suite against the following browsers: Safari, Chrome, Firefox, Opera,
-IE8, IE9 and mobile browsers (Android, Chrome Mobile, iOS Safari).</p>
+<p>以下のブラウザーで広範囲のテストを実施しています。：　Safari, Chrome, Firefox, Opera,
+IE8, IE9 そしてモバイルブラウザー (Android, Chrome Mobile, iOS Safari)。</p>
 
-<h4>What's Angular's performance like?</h4>
+<h4>Angularのパフォーマンスはどのようなものですか？</h4>
 
-<p>The startup time heavily depends on your network connection, state of the cache, browser used and
-available hardware, but typically we measure bootstrap time in tens or hundreds of milliseconds.</p>
+<p>起動時間はネットワーク、キャッシュの状態、使用するブラウザー、そしてハードウェアに大きく依存しますが、
+典型的には我々は起動時間を数十から数百ミリ秒以内と測定しています。</p>
 
-<p>The runtime performance will vary depending on the number and complexity of bindings on the page
-as well as the speed of your backend (for apps that fetch data from the backend). Just for an
-illustration we typically build snappy apps with hundreds or thousands of active bindings.</p>
+<p>実行速度はバックエンドの速度（データのフェッチ）によるのはもちろん、ページにおけるバインディングの数と複雑さに
+よっても変動します。実例をあげるため、我々はいつものように何百何千もの活発なバインディングを行うしゃれたアプリを作りました。</p>
 
-<h4>How big is the angular.js file that I need to include?</h4>
+<h4>angular.jsで入れる必要があるファイルはどのくらい大きいのでしょうか？</h4>
 
-<p>The size of the file is &lt; 29KB compressed and minified.</p>
+<p>ファイルサイズは圧縮してminifyしたもので29KB以下です。</p>
 
-<h4>Can I use the open-source Closure Library with Angular?</h4>
+<h4>オープンソースのClosureライブラリーをAngularと共に利用できますか？</h4>
 
-<p>Yes, you can use widgets from the <a href="http://code.google.com/closure/library">Closure Library</a>
-in Angular.</p>
+<p>はい、<a href="http://code.google.com/closure/library">Closure Library</a> からAngularのwidgetを利用できます。</p>
 
-<h4>Does Angular use the jQuery library?</h4>
+<h4>AngularはjQueryライブラリーを利用しますか？</h4>
 
-<p>Yes, Angular can use <a href="http://jquery.com/">jQuery</a> if it's present in your app when the
-application is being bootstrapped. If jQuery is not present in your script path, Angular falls back
-to its own implementation of the subset of jQuery that we call <a href="api/angular.element"><code>jQLite</code></a>.</p>
+<p>はい、Angularはアプリケーションの起動時に <a href="http://jquery.com/">jQuery</a> が存在する場合、それを利用します。
+jQueryがscript pathに存在しない場合、Angularは <a href="api/angular.element"><code>jQLite</code></a> と我々が呼ぶ、jQueryの
+サブセットとなるAngularの独自実装にフォールバックします。</p>
 
-<h4>What is testability like in Angular?</h4>
+<h4>Angularのテスタビリティーとはどのようなものですか？</h4>
 
-<p>Very testable and designed this way from ground up. It has an integrated dependency injection
-framework, provides mocks for many heavy dependencies (server-side communication). See
-<a href="api/ng">service</a> for details.</p>
+<p>とてもテストしやすいですし、その方法を一から設計しています。統合された依存性注入フレームワークがありますし、
+多くの重い依存性（サーバーサイドとの通信のような）のためにモックを提供しています。
+詳しくは <a href="api/ng">service</a> をご覧ください。</p>
 
-<h4>How can I learn more about Angular?</h4>
+<h4>Angularもっと学ぶにはどうしたらいいでしょうか？</h4>
 
-<p>Watch the July 17, 2012 talk
+<p>2012年7月17日の講義を御覧ください。
 "<a href="http://www.youtube.com/watch?v=1CpiB3Wk25U">AngularJS Intro + Dependency Injection</a>".</p>
 
-<h4>How is Angular licensed?</h4>
+<h4>Angularのライセンスは何でしょうか？</h4>
 
-<p>The MIT License.</p>
+<p>　
+MITライセンスです。</p>
 
-<h4>Can I download and use the Angular logo artwork?</h4>
+<h4>Angularのロゴのアートワークをダウンロードして使ってもいいでしょうか？</h4>
 
-<p>Yes! You can find design files in our github repository, under "<a href="https://github.com/angular/angular.js/tree/master/images/logo">angular.js/images/logo</a>"
-The logo design is licensed under a "<a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>". If you have some other use in mind, contact us.</p>
+<p>はい！こちらのgithubリポジトリにデザインファイルがあります。"<a href="https://github.com/angular/angular.js/tree/master/images/logo">angular.js/images/logo</a>"
+ロゴデザインのライセンスは"<a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>"です。
+もし何か他の用途を考えているならば、我々にお問い合わせください。</p>
 
-<h4>How can I get some AngularJS schwag?</h4>
+<h4>AngularJSの販促グッズが欲しいです。</h4>
 
-<p>We often bring a few t-shirts and stickers to events where we're presenting. If you want to order your own, the folks who
-make our schwag will be happy to do a custom run for you, based on our existing template. By using the design they have on file,
-they'll waive the setup costs, and you can order any quantity you need.</p>
+<p>我々がプレゼンをするイベントにはよく少量のTシャツとステッカーを持っていきます。もしあなたが自分用に注文したければ、我々の販促グッズを作る方々が
+喜んで、既存のひな形に基づいた特別注文に対応いたします。保有しているデザインを使うことにより設定コストを無くしますので、あなたは必要なだけどんな数量でも注文できます。</p>
 
-<p><strong>Stickers</strong>
-Contact Tom Witting (or anyone in sales) via email at tom@stickergiant.com, and tell him you want to order some AngularJS
-stickers just like the ones in job #42711. You'll have to give them your own info for billing and shipping. </p>
+<p><strong>ステッカー</strong>
+Tom Witting（または営業のどなたか）の tom@stickergiant.com までご連絡ください。そしてAngularJSのステッカーを注文したい旨お伝えください。(just like the ones in job #42711)
+お支払いと配送の情報をお伝え下さい。</p>
 
-<p>As long as the design stays exactly the same, <a href="http://www.stickergiant.com">StickerGiant</a> will give you a reorder discount.</p>
+<p>デザインが同じである限り、<a href="http://www.stickergiant.com">StickerGiant</a> は再注文割引がご利用になれます。</p>
 
-<p><strong>T-shirts</strong>
-Contact sales at <a href="http://www.customink.com">www.customink.com</a> and tell them you want some shirts with design name "angularjs",
-just like past order #2106371. You'll have to give them your own info for billing and shipping.</p>
+<p><strong>Tシャツ</strong>
+営業<a href="http://www.customink.com">www.customink.com</a>までご連絡ください。そして過去の注文番号#2106371のように、"angularjs"のTシャツを注文したい旨お伝え下さい。
+お支払いと配送の情報をお伝え下さい。</p>
 
-<p>As long as the design stays exactly the same, CustomInk won't charge for any set up fees, and they'll give you a reorder discount.</p>
+<p>デザインが同じである限り、CustomInkはいかなる初期料金も請求しませんし、再注文割引をご利用になれます。</p>
 
-<h3>Common Pitfalls</h3>
+<h3>よくある落とし穴</h3>
 
-<p>The Angular support channel (#angularjs on Freenode) sees a number of recurring pitfalls that new users of Angular fall into.
-This document aims to point them out before you discover them the hard way.</p>
+<p>Angularのサポートチャンネル(#angularjs on Freenode) では、多くのAngular初心者が繰り返し陥りがちな落とし穴が見られます。
+このドキュメントは、あなたがそれらに苦労する前に説明することが目的です。</p>
 
-<h4>DOM Manipulation</h4>
+<h4>DOM操作</h4>
 
-<p>Stop trying to use jQuery to modify the DOM in controllers. Really.
-That includes adding elements, removing elements, retrieving their contents, showing and hiding them.
-Use built-in directives, or write your own where necessary, to do your DOM manipulation.
-See below about duplicating functionality.</p>
+<p>controllerにおいてDOMを変更するのにjQueryを使うのをやめましょう。本当に。
+elementを追加したり削除したり、それらのコンテンツの取得したり表示したり隠したりすることを含みます。
+DOM操作には、ビルトインされたdirectiveを使うか、または必要になればあなた独自のdirectiveを書いてください。
+以下の重複した機能についてをご覧ください。</p>
 
-<p>If you're struggling to break the habit, consider removing jQuery from your app.
-Really. Angular has the $http service and powerful directives that make it almost always unnecessary.
-Angular's bundled jQLite has a handful of the features most commonly used in writing Angular directives, especially binding to events.</p>
+<p>もしあなたがそういった癖から抜け出すのに苦労しているなら、あなたのアプリからjQueryを削除することを検討してください。本当に。
+Angularには$http serviceとパワフルなdirectiveがあるので、ほとんどの場合jQueryを使わなくとも大丈夫です。
+AngularにバンドルされたjQliteはAngularのdirective、特にeventのバインディングを書くのに最も頻繁に使われる一握りの機能を持っています。</p>
 
-<h4>Trying to duplicate functionality that already exists</h4>
+<h4>既にある機能を再現しようとしてしまうこと</h4>
 
-<p>There's a good chance that your app isn't the first to require certain functionality.
-There are a few pieces of Angular that are particularly likely to be reimplemented out of old habits.</p>
+<p>あなたのアプリはある機能を必要とする最初のアプリではない可能性が十分あります。
+古い癖から抜け出すようにAngularにおいて再実装された特別な機能がいくつかあります。</p>
 
 <p><strong>ng-repeat</strong></p>
 
-<p><code>ng-repeat</code> gets this a lot.
-People try to use jQuery (see above) to add more elements to some container as they're fetched from the server.
-No, bad dog.
-This is what <code>ng-repeat</code> is for, and it does its job very well.
-Store the data from the server in an array on your <code>$scope</code>, and bind it to the DOM with <code>ng-repeat</code>.</p>
+<p><code>ng-repeat</code> はとても頻繁に使います。
+よく、サーバーからフェッチした多量のelementをcontainerに追加するためにjQueryを使おうとする人がいます。
+良くないことです。
+<code>ng-repeat</code>はこの用途のためのものです。とてもうまくやってくれますよ。
+サーバーからのデータを<code>$scope</code>に配列で入れて、<code>ng-repeat</code>でDOMにバインドしてください。</p>
 
 <p><strong>ng-show</strong></p>
 
-<p><code>ng-show</code> gets this frequently too.
-Conditionally showing and hiding things using jQuery is a common pattern in other apps, but Angular has a better way.
-<code>ng-show</code> (and <code>ng-hide</code>) conditionally show and hide elements based on boolean expressions.
-Describe the conditions for showing and hiding an element in terms of <code>$scope</code> variables:</p>
+<p><code>ng-show</code>も頻繁に使います。
+jQueryを使って、条件によって要素を表示したり隠したりするのはよくあるパターンですが、Angularではより良い方法があります。
+<code>ng-show</code> (及び <code>ng-hide</code>)　は真偽値表現にもとづいて条件によって要素を表示したり隠したりします。
+<code>$scope</code>変数に関して、要素を表示したり隠したりする条件を説明します。</p>
 
 <pre><code>&lt;div ng-show="!loggedIn"&gt;Click &lt;a href="#/login"&gt;here&lt;/a&gt; to log in&lt;/div&gt;
 </code></pre>
 
-<p>Note also the counterpart <code>ng-hide</code> and similar <code>ng-disabled</code>.
-Note especially the powerful <code>ng-switch</code> that should be used instead of several mutually exclusive <code>ng-show</code>s.</p>
+<p>同様に<code>ng-hide</code> と、それとよく似た <code>ng-disabled</code>も覚えておいてください。
+特に、いくつかの相互排他的な<code>ng-show</code>があるときに代わりに使うべき、パワフルな<code>ng-switch</code>も覚えておいてください。</p>
 
 <p><strong>ng-class</strong></p>
 
-<p><code>ng-class</code> is the last of the big three.
-Conditionally applying classes to elements is another thing commonly done manually using jQuery.
-Angular, of course, has a better way.
-You can give <code>ng-class</code> a whitespace-separated set of class names, and then it's identical to ordinary <code>class</code>.
-That's not very exciting, so there's a second syntax:</p>
+<p><code>ng-class</code>はこれら3つの最後の大物です。
+条件によってclassをelementに適用することもまた頻繁にjQueryを使って手動でなされされます。
+Angularでは、もちろん、より良い方法があります。
+<code>ng-class</code>にwhitespace-separatedなクラス名のsetを設定することができ、そして普通の<code>class</code>と同じ働きをします。
+あまりおもしろくはないですね。では、もう一つの文法をお見せします。</p>
 
 <pre><code>&lt;div ng-class="{ errorClass: isError, warningClass: isWarning, okClass: !isError &amp;&amp; !isWarning }"&gt;...&lt;/div&gt;
 </code></pre>
 
-<p>Where you give <code>ng-class</code> an object, whose keys are CSS class names and whose values are conditional expressions using <code>$scope</code> variables.
-The element will then have all the classes whose conditions are truthy, and none of those whose conditions are falsy.</p>
+<p><code>ng-class</code>に、keyがCSSクラス名で、valueが<code>$scope</code>変数を使った条件表現のオブジェクトを設定しています。
+elementは条件がtrueであるすべてのクラスを持ち、falseであるものは持ちません。</p>
 
-<p>Note also the handy <code>ng-class-even</code> and <code>ng-class-odd</code>, and the related though somewhat different <code>ng-style</code>.</p>
+<p>便利な<code>ng-class-even</code> と <code>ng-class-odd</code>、そして関連していますがいくぶん異なる<code>ng-style</code>も覚えておいてください。</p>
 
-<h4><code>$watch</code> and <code>$apply</code></h4>
+<h4><code>$watch</code> と <code>$apply</code></h4>
 
-<p>Angular's two-way data binding is the root of all awesome in Angular.
-However, it's not magic, and there are some situations where you need to give it a nudge in the right direction.</p>
+<p>双方向データバインディングはAngularの凄さの根源です。
+しかしながら、それは魔法ではありませんし、いくつかの状況では、正しい方向にやさしく導いてやる必要があります。</p>
 
-<p>When you bind a value to an element in Angular using <code>ng-model</code>, <code>ng-repeat</code>, etc., Angular creates a <code>$watch</code> on that value.
-Then whenever a value on a scope changes, all <code>$watch</code>es observing that element are executed, and everything updates.</p>
+<p>Angularで<code>ng-model</code>、 <code>ng-repeat</code>その他を使って値をelementにバインドするとき、Angularはその値に<code>$watch</code>を作ります。
+そして、scopeの値が変わった時には、そのelementを監視するすべての<code>$watch</code>が実行され、全てが更新されます。</p>
 
-<p>Sometimes, usually when you're writing a custom directive, you will have to define your own <code>$watch</code> on a scope value to make the directive react to changes.</p>
+<p>時々、普通はあなたがカスタムdirectiveを書いているときに、scopeの値の<code>$watch</code>においてそのdirectiveが変更に反応するように、
+独自の<code>$watch</code>を定義する必要があるでしょう。</p>
 
-<p>On the flip side, sometimes you change a scope value in some code but the app doesn't react to it.
-Angular checks for scope variable changes after pieces of your code have finished running; for example, when <code>ng-click</code> calls a function on your scope, Angular will check for changes and react.
-However, some code is outside of Angular and you'll have to call <code>scope.$apply()</code> yourself to trigger the update.
-This is most commonly seen in event handlers in custom directives.</p>
+<p>その反面、時々いくつかのコードでscopeの値を変更したのにアプリがそれに反応しないことがあります。
+Angularはコードの実行終了後、scope変数の変更をチェックします。例えば、<code>ng-click</code>がscopeの関数をコールするとき、
+Angularは変更をチェックし反応します。
+しかしながら、いくつかのコードはAngularの外部にあり、更新を引き起こすには<code>scope.$apply()</code>をコールする必要があるでしょう。
+これはカスタムdirectiveにてもっとも頻繁に見られます。</p>
 
-<h4>Combining <code>ng-repeat</code> with other directives</h4>
+<h4><code>ng-repeat</code>と他のdirectiveを混ぜる</h4>
 
-<p><code>ng-repeat</code> is extremely useful, one of the most powerful directives in Angular.
-However the transformation it applies to the DOM is substantial.
-Therefore applying other directives (such as <code>ng-show</code>, <code>ng-controller</code> and others) to the same element as <code>ng-repeat</code> generally leads to problems.</p>
+<p><code>ng-repeat</code>は極めて役に立ちます。Angularでもっともパワフルなdirectiveの一つです。
+しかしながら、それがDOMに適用する変化は相当なものです。
+したがって他のdirective(<code>ng-show</code>や<code>ng-controller</code>など)を<code>ng-repeat</code>と同じelementに適用することは、大抵は問題を引き起こします。</p>
 
-<p>If you want to apply a directive to the whole repeat, wrap the repeat in a parent element and put it there.
-If you want to apply a directive to each inner piece of the repeat, put it on a child of the element with <code>ng-repeat</code>.</p>
+<p>もしあなたがrepeat全体に対してdirectiveを適用したいならば、そのrepeatを親elementでラップして置いてください。
+もしあなたがrepeatの中の一つ一つにdirectiveを適用したいならば、それを<code>ng-repeat</code>のelementの子elementに置いてください。</p>
 
-<h4><code>$rootScope</code> exists, but it can be used for evil</h4>
+<h4><code>$rootScope</code> はあるがが、それは邪悪な使用をされ得る</h4>
 
-<p>Scopes in Angular form a hierarchy, prototypically inheriting from a root scope at the top of the tree.
-Usually this can be ignored, since most views have a controller, and therefore a scope, of their own.</p>
+<p>Angularのscopeはツリートップのroot scopeからのプロトタイプ継承の体系を形成します。
+通常これは無視して構いません。なぜならば大部分のviewはcontrollerを持ち、それゆえそれら独自のscopeを持つからです。</p>
 
-<p>Occasionally there are pieces of data that you want to make global to the whole app.
-For these, you can inject <code>$rootScope</code> and set values on it like any other scope.
-Since the scopes inherit from the root scope, these values will be available to the expressions attached to directives like <code>ng-show</code> just like values on your local <code>$scope</code>.</p>
+<p>時折、アプリ全体でグローバルにしたいデータがあります。
+これらのデータのため、<code>$rootScope</code>を注入し他のscopeと同じように値をセットする事ができます。
+scopeはroot scopeから継承されるため、ローカルな<code>$scope</code>と同じように、これらの値は<code>ng-show</code>のようなdirectiveに付加されたexpressionで利用可能になります。</p>
 
-<p>Of course, global state sucks and you should use <code>$rootScope</code> sparingly, like you would (hopefully) use with global variables in any language.
-In particular, don't use it for code, only data.
-If you're tempted to put a function on <code>$rootScope</code>, it's almost always better to put it in a service that can be injected where it's needed, and more easily tested.</p>
+<p>もちろん、globalな状態は酷いものであるので、<code>$rootScope</code>の使用は慎重にするべきです。あなたが（願わくば）他の言語でgrobal変数を扱うのと同様に。
+Of course, global state sucks and you should use <code>$rootScope</code> sparingly, like you would (hopefully) use with global variables in any language.
+特に、コードのために使ってはいけません。データのためだけに留めてください。
+もしあなたが<code>$rootScope</code>に関数を置く誘惑にかられたならば、それはほとんど常にserviceに置くほうがいいでしょう。 serviceは必要なときに注入できますし、テストがより簡単です。</p>
 
-<p>Conversely, don't create a service whose only purpose in life is to store and return bits of data.</p></div>
+<p>逆に、少しのデータを出し入れするためだけのserviceを作らないでください。</p></div>

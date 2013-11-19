@@ -35,18 +35,19 @@
 </div><h3>Demo</h3>
 <div class="well doc-example-live" ng-embed-app="" ng-set-html="index.html-10" ng-eval-javascript="script.js-9"></div>
 
-<h2>Things to notice</h2>
+<h2>注意点</h2>
 
-<p>Take a look through the source and note:</p>
+<p>ソースコードと注目点をみていきましょう:</p>
 
 <ul>
 <li>The script tag that <a href="guide/bootstrap">bootstraps</a> the Angular environment.</li>
-<li>The text <a href="api/ng.directive:input"><code>input form control</code></a> which is
-bound to the greeting name text.</li>
-<li>There is no need for listener registration and event firing on change events.</li>
-<li>The implicit presence of the <code>name</code> variable which is in the root <a href="api/ng.$rootScope.Scope"><code>scope</code></a>.</li>
-<li>The double curly brace <code>{{markup}}</code>, which binds the name variable to the greeting text.</li>
+<li>headタグの中の一番上にあるスクリプトタグはAngularの環境を<a href="guide/bootstrap">自動的に初期化</a>します。</li>
+<li>Hello以下に続く文字は<a href="api/ng.directive:input"><code>インプットフォーム</code></a>から入力されたテキストと同じになります。</li>
+<li>リスナの登録と変更時に発火するイベントは必要ありません。</li>
+<li>暗黙の存在である変数nameはroot<a href="api/ng.$rootScope.Scope"><code>スコープ</code></a>に含まれています。</li>
+<li>ふたつの波括弧<code>{{markup}}</code>は変数nameをHello以下の文字にバインドさせます。</li>
 <li>The concept of <a href="guide/dev_guide.templates.databinding">data binding</a>, which reflects any
 changes to the
 input field in the greeting text.</li>
+<li><a href="guide/dev_guide.templates.databinding">データバインディング</a>の構想では、インプットフォームの全ての変化をHello以下に反映させます。</li>
 </ul></div>

@@ -1,77 +1,88 @@
 <h1><code ng:non-bindable=""></code>
 <span class="hint"></span>
 </h1>
-<div><p>Depending on the context of the discussion in the Angular documentation, the term <em>model</em> can refer to
-either a single object representing one entity (for example, a model called "phones" with its value
-being an array of phones) or the entire data model for the application (all entities).</p>
+<div><p>Angular ドキュメントでは、<em>モデル</em> という言葉は文脈によって、 
+1 つのエンティティを表現する単一のオブジェクト
+(例えば、複数の phone の配列を値に持つ "phones" というモデル) を指す場合と、
+アプリケーションの全データモデル (すべてのエンティティ) を指す場合があります。</p>
 
-<p>In Angular, a model is any data that is reachable as a property of an angular <a href="guide/scope">Scope</a> object. The name of the property is the model identifier and the value is
-any JavaScript object (including arrays and primitives).</p>
+<p>Angular では、モデルとは Angular の <a href="guide/scope">スコープ</a> 
+オブジェクトから到達可能なあらゆるデータのことです。
+プロパティの名前はモデルの識別子であり、プロパティの値は何らかの JavaScript のオブジェクト 
+(配列とプリミティブ型を含む)です。</p>
 
-<p>The only requirement for a JavaScript object to be a model in Angular is that the object must be
-referenced by an Angular scope as a property of that scope object. This property reference can be
-created explicitly or implicitly.</p>
+<p>JavaScript のオブジェクトが Angular のモデルになるための唯一の条件は、
+そのオブジェクトが Angular スコープオブジェクトのプロパティとして、
+スコープから参照できることだけです。
+このようなプロパティへの参照は明示的に作成することもでき、暗黙的に作成されることもあります。</p>
 
-<p>You can create models by explicitly creating scope properties referencing JavaScript objects in the
-following ways:</p>
-
-<ul>
-<li><p>Make a direct property assignment to the scope object in JavaScript code; this most commonly
-occurs in controllers:</p>
-
-<pre><code> function MyCtrl($scope) {
-     // create property 'foo' on the MyCtrl's scope
-     // and assign it an initial value 'bar'
-     $scope.foo = 'bar';
- }
-</code></pre></li>
-<li><p>Use an <a href="guide/expression">angular expression</a> with an assignment operator in templates:</p>
-
-<pre><code> &lt;button ng-click="{{foos='ball'}}"&gt;Click me&lt;/button&gt;
-</code></pre></li>
-<li><p>Use <a href="api/ng.directive:ngInit"><code>ngInit directive</code></a> in templates (for toy/example apps
-only, not recommended for real applications):</p>
-
-<pre><code> &lt;body ng-init=" foo = 'bar' "&gt;
-</code></pre></li>
-</ul>
-
-<p>Angular creates models implicitly (by creating a scope property and assigning it a suitable value)
-when processing the following template constructs:</p>
+<p>下記のように、JavaScript オブジェクトを参照するスコーププロパティを明示的に作成することで、
+モデルを作成することができます。</p>
 
 <ul>
-<li><p>Form input, select, textarea and other form elements:</p>
+<li><p>JavaScript のコードでスコープオブジェクトのプロパティに直接代入する
+(主にコントローラで使われる方法)</p>
 
-<pre><code> &lt;input ng-model="query" value="fluffy cloud"&gt;
-</code></pre>
+<pre class="prettyprint linenums">
+         function MyCtrl($scope) {
+             // MyCtrlのスコープに'foo'というプロパティを作成し、
+             // 初期値'bar'を代入する
+             $scope.foo = 'bar';
+         }
+  </pre></li>
+<li><p>テンプレートで、代入演算子を含む <a href="guide/expression">Angular の expression</a> を使う</p>
 
-<p>The code above creates a model called "query" on the current scope with the value set to "fluffy
-cloud".</p></li>
-<li><p>An iterator declaration in <a href="api/ng.directive:ngRepeat"><code>ngRepeater</code></a>:</p>
+<pre class="prettyprint linenums">
+         &lt;button ng-click="{{foos='ball'}}"&gt;Click me&lt;/button&gt;
+  </pre></li>
+<li><p>テンプレートで、 <a href="api/ng.directive:ngInit"><code>ngInit ディレクティブ</code></a> を使う
+(サンプルアプリケーションのみで使ってください。
+実際のアプリケーションではおすすめしません。)</p>
 
-<pre><code> &lt;p ng-repeat="phone in phones"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>The code above creates one child scope for each item in the "phones" array and creates a "phone"
-object (model) on each of these scopes with its value set to the value of "phone" in the array.</p></li>
+<pre class="prettyprint linenums">
+         &lt;body ng-init=" foo = 'bar' "&gt;
+  </pre></li>
 </ul>
 
-<p>In Angular, a JavaScript object stops being a model when:</p>
+<p>次のようなテンプレート構造を処理するとき、 Angular はモデルを暗黙的に作成します。
+(スコープのプロパティを作成し、適切な値を代入します。)</p>
 
 <ul>
-<li><p>No Angular scope contains a property that references the object.</p></li>
-<li><p>All Angular scopes that contain a property referencing the object become stale and eligible for
-garbage collection.</p></li>
+<li><p>input, select, textarea や他のフォーム要素</p>
+
+<pre class="prettyprint linenums">
+         &lt;input ng-model="query" value="fluffy cloud"&gt;
+  </pre>
+
+<p>上記のコードはカレントスコープに "query" というモデルを作成し、その値を "fluffy cloud"
+にセットします。</p></li>
+<li><p><a href="api/ng.directive:ngRepeat"><code>ngRepeat</code></a> におけるイテレータの宣言</p>
+
+<pre class="prettyprint linenums">
+         &lt;p ng-repeat="phone in phones"&gt;&lt;/p&gt;
+  </pre>
+
+<p>上記のコードは "phones" 配列のそれぞれの要素に対して 1 つずつ子スコープを作成し、
+子スコープ に "phone" オブジェクト (モデル) を作成して、
+その値を配列内の "phone" の値にセットします。</p></li>
 </ul>
 
-<p>The following illustration shows a simple data model created implicitly from a simple template:</p>
+<p>Angular では、 JavaScript オブジェクトは下記の場合にモデルではなくなります。</p>
+
+<ul>
+<li><p>オブジェクトを参照するプロパティを持つ Angular スコープがなくなった場合</p></li>
+<li><p>オブジェクトを参照するプロパティを持つすべての Angular スコープが古くなり(使用されなくなり)、
+ガベージコレクションの対象になった場合</p></li>
+</ul>
+
+<p>以下の図は、単純なテンプレートをもとにモデルが暗黙的に作成される様子を示しています。</p>
 
 <p><img src="img/guide/about_model_final.png"></p>
 
-<h3>Related Topics</h3>
+<h3>関連トピック</h3>
 
 <ul>
-<li><a href="guide/dev_guide.mvc">About MVC in Angular</a></li>
-<li><a href="guide/dev_guide.mvc.understanding_controller">Understanding the Controller Component</a></li>
-<li><a href="guide/dev_guide.mvc.understanding_view">Understanding the View Component</a></li>
+<li><a href="guide/dev_guide.mvc">Angular における MVC について</a></li>
+<li><a href="guide/dev_guide.mvc.understanding_controller">コントローラコンポーネントを理解する</a></li>
+<li><a href="guide/dev_guide.mvc.understanding_view">ビューコンポーネントを理解する</a></li>
 </ul></div>
